@@ -7,4 +7,4 @@ The website is built in [Jekyll](https://jekyllrb.com/) using the [Just the Docs
 If you want to contribute and/or to build the website locally, please read the:
 
 - [Installation guide](website-install.md)
-- [Website development guide](website-dev.md)
+- [Website development guide](website-dev.md).

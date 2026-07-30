@@ -24,7 +24,7 @@ usetocbot: true
   <source src="assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
 **Video.** Arah tujuan kita: pembelajaran ini menggunakan analogi air yang intuitif—seperti tangki air ini, di mana tingkat air yang lebih tinggi (tegangan) mendorong lebih banyak air (arus) keluar dari bagian bawah—untuk membangun tiga konsep dasar dari tegangan, arus, dan hambatan.
-{: .fs-1 }
+{: .fs-1 } .
 
 Dalam pembelajaran ini, kita akan mempelajari tiga konsep utama kelistrikan, yaitu **arus** (*current*), **tegangan** (*voltage*), dan **hambatan** (*resistance*), yang menjadi fondasi dari elektronika dan rangkaian listrik. Kita juga akan menggunakan simulator rangkaian online untuk mempraktikkan komponen dasar dan memperdalam pemahaman.
 

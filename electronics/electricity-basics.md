@@ -13,7 +13,7 @@ usetocbot: true
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
-## Table of Contents
+## Daftar Isi
 {: .no_toc .text-delta }
 
 1. TOC
@@ -23,166 +23,166 @@ usetocbot: true
 <video autoplay loop muted playsinline aria-label="Animation of a water tank analogy for electrical circuits. As the water level rises, more water flows out of a hole at the bottom, illustrating how higher voltage produces more current.">
   <source src="assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Video.** Where we're headed: this lesson uses intuitive water analogies—like this water tank, where a higher water level (voltage) pushes more water (current) out the bottom—to build up the three foundational concepts of voltage, current, and resistance.
+**Video.** Arah tujuan kita: pembelajaran ini menggunakan analogi air yang intuitif—seperti tangki air ini, di mana tingkat air yang lebih tinggi (tegangan) mendorong lebih banyak air (arus) keluar dari bagian bawah—untuk membangun tiga konsep dasar dari tegangan, arus, dan hambatan.
 {: .fs-1 }
 
-In this lesson, we are going to learn about three key electricity concepts, **current**, **voltage**, and **resistance**, which form the foundation of electronics and circuits. We will also use an online circuit simulator to play with basic components and advance understanding.
+Dalam pembelajaran ini, kita akan mempelajari tiga konsep utama kelistrikan, yaitu **arus** (*current*), **tegangan** (*voltage*), dan **hambatan** (*resistance*), yang menjadi fondasi dari elektronika dan rangkaian listrik. Kita juga akan menggunakan simulator rangkaian online untuk mempraktikkan komponen dasar dan memperdalam pemahaman.
 
-But first—what is a circuit? A **circuit** is a closed loop that provides a path for electric current to flow. At minimum, a circuit requires a voltage source (*e.g.,* a battery), a conductive path (*e.g.,* wires), and a load (*e.g.,* a light bulb or resistor) that does useful work. If the loop is broken at any point, current cannot flow and we call it an "open circuit" (more on this [later](#what-is-an-open-circuit)).
+Namun sebelum itu—apa itu rangkaian listrik? Sebuah **rangkaian listrik** (*circuit*) adalah lintasan tertutup yang menyediakan jalur bagi arus listrik untuk mengalir. Minimal, sebuah rangkaian membutuhkan sumber tegangan (misalnya baterai), jalur konduktif (misalnya kabel), dan beban (misalnya lampu bohlam atau resistor) yang melakukan kerja berguna. Jika lintasan tersebut terputus di titik mana pun, arus tidak dapat mengalir dan kita menyebutnya sebagai "rangkaian terbuka" (*open circuit*) (penjelasan lebih lanjut [nanti](#apa-itu-rangkaian-terbuka)).
 
 <!-- TODO: Include a nice overview animation? [here](https://kaiserscience.wordpress.com/physics/electromagnetism/electric-current/) -->
 
 {: .note }
-This material is important. Depending on your previous background in physics or engineering, some of these concepts may be brand new and confusing. Take your time to understand (and re-read) sections—this material will help you comprehend *how* circuits work and *how* and *why* we hook up and use electronic components the way we do. But this is also *not* a circuits course nor a [physics course](https://youtu.be/x1-SibwIPM4), so I will largely focus on what I *think* is most critical to physical computing.
+Materi ini sangat penting. Tergantung pada latar belakang Anda sebelumnya di bidang fisika atau teknik, beberapa konsep ini mungkin terasa sangat baru dan membingungkan. Luangkan waktu Anda untuk memahami (dan membaca ulang) setiap bagian—materi ini akan membantu Anda memahami *bagaimana* rangkaian bekerja serta *bagaimana* dan *mengapa* kita menghubungkan dan menggunakan komponen elektronik dengan cara yang kita lakukan. Namun, ini juga *bukan* kursus rangkaian listrik ataupun [kursus fisika](https://youtu.be/x1-SibwIPM4), jadi saya akan sangat berfokus pada apa yang saya *pikir* paling krusial untuk *physical computing*.
 
-## A brief overview
+## Ringkasan singkat
 
-So, what are voltage, current, and resistance?
+Jadi, apa itu tegangan, arus, dan hambatan?
 
-In short, **voltage** "pushes" **electrons** through conductive material (*e.g.,* a wire). The amount of **electron flow** is called **current** (measured in amps). Some materials are better at conducting current than others. Resistors are specially formulated to *resist* the flow of electrons (the **resistance** is measured in ohms).
+Singkatnya, **tegangan** "mendorong" **elektron** melalui material konduktif (misalnya kabel). Jumlah dari **aliran elektron** tersebut disebut **arus** (diukur dalam satuan amp). Beberapa material memiliki kemampuan menghantarkan arus yang lebih baik daripada yang lain. Resistor diformulasikan secara khusus untuk *menghambat* aliran elektron (nilai **hambatan** diukur dalam satuan ohm).
 
 ![A humorous depiction of the relationship between voltage, current, and resistance. Three cartoon characters are shown: the "volt" character is trying to push the "amp" character through a wire but the "ohm" character is resisting the "amp" character by restricting the girth of the wire with a tightening rope.](assets/images/OhmsLawCartoon_ShowingRelationshipBetweenVoltsAmpsAndResistance.png)
 {: .mx-auto .align-center }
 
-**Figure.** A humorous but helpful depiction of the relationship between voltage (measured in volts), current (measured in amps), and resistance (measured in ohms). The yellow "volt" character is trying to push the green "amp" character through a tube (*i.e.,* a wire) but the red "ohm" character is impeding this by restricting the size of the tube (by tightening a rope, reducing its girth). The image source is unknown but there are many examples and alternatives [online](https://www.google.com/search?q=ohm%27s+law+cartoon&tbm=isch).
+**Gambar.** Gambaran jenaka namun sangat membantu mengenai hubungan antara tegangan (diukur dalam volt), arus (diukur dalam amp), dan hambatan (diukur dalam ohm). Karakter "volt" berwarna kuning mencoba mendorong karakter "amp" berwarna hijau melalui sebuah tabung (yaitu kabel), tetapi karakter "ohm" berwarna merah menghalanginya dengan membatasi ukuran tabung tersebut (dengan mengencangkan tali, memperkecil lingkarannya). Sumber gambar tidak diketahui tetapi ada banyak contoh dan alternatifnya [di internet](https://www.google.com/search?q=ohm%27s+law+cartoon&tbm=isch).
 {: .fs-1 }
 
-What are the measurement units for voltage, current, and resistance?
+Apa saja satuan pengukuran untuk tegangan, arus, dan hambatan?
 
-Just like we measure weight in kilograms and temperature in Celsius, so too do we have standard units of measurement for current, voltage, and resistance (called [SI units](https://en.wikipedia.org/wiki/International_System_of_Units) for the *International System of Units*). We will use these quantities and measurements a lot in physical computing, so take a moment to study the table below.
+Sama seperti kita mengukur berat dalam kilogram dan suhu dalam Celsius, kita juga memiliki satuan pengukuran standar untuk arus, tegangan, dan hambatan (disebut [satuan SI](https://id.wikipedia.org/wiki/Sistem_Satuan_Internasional) untuk *Sistem Satuan Internasional*). Kita akan sangat sering menggunakan besaran dan pengukuran ini dalam *physical computing*, jadi luangkan waktu sejenak untuk mempelajari tabel di bawah ini.
 
-| Quantity   | Symbol | Unit of Measurement   | Unit abbreviation |
+| Besaran    | Simbol | Satuan Pengukuran     | Singkatan Satuan |
 |------------|--------|-----------------------|-------------------|
-| Current    | $$I$$  | Ampere (or Amp)       | A |
-| Voltage    | $$V$$  | Volt                  | V |
-| Resistance | $$R$$  | Ohm                   | Ω |
+| Arus       | $$I$$  | Ampere (atau Amp)     | A                 |
+| Tegangan   | $$V$$  | Volt                  | V                 |
+| Hambatan   | $$R$$  | Ohm                   | Ω                 |
 
 
-### A hydraulic analogy
+### Analogi hidrolik (air)
 
-In circuits, we often use hydraulic analogies to aid understanding. For example, we can think of *voltage* as analogous to *water pressure* in a water plumbing system. An increase in water pressure provides more force to propel water molecules through pipes. Water flows from **high pressure** (intake supply) to **low pressure** (out an open valve). Similarly, an increase in voltage provides more force to "push" electrons from **high** electric potential to **low** electric potential through a circuit.
+Dalam rangkaian listrik, kita sering menggunakan analogi hidrolik untuk membantu pemahaman. Sebagai contoh, kita bisa menganggap *tegangan* analog dengan *tekanan air* pada sistem pipa air. Peningkatan tekanan air memberikan gaya yang lebih besar untuk mendorong molekul air melalui pipa. Air mengalir dari **tekanan tinggi** (sumber pasokan masuk) ke **tekanan rendah** (keluar dari katup yang terbuka). Demikian pula, peningkatan tegangan memberikan gaya yang lebih besar untuk "mendorong" elektron dari potensial listrik **tinggi** ke potensial listrik **rendah** melalui sebuah rangkaian.
 
-Just as a wider water pipe can carry more water, so too can a thicker conductive wire carry more current. Obstructions in the pipe—such as sand or, worse, clay—can slow the flow of water. These obstructions are similar to resistors, which we can insert into circuits to impede the flow of current ((resistors are made from materials whose electrons are less easily displaced)).
+Sama seperti pipa air yang lebih lebar dapat menampung lebih banyak air, kabel konduktif yang lebih tebal juga dapat menghantarkan lebih banyak arus. Sumbatan di dalam pipa—seperti pasir atau, yang lebih buruk, tanah liat—dapat memperlambat aliran air. Sumbatan ini mirip dengan resistor, yang dapat kita pasang ke dalam rangkaian untuk merintangi aliran arus (resistor terbuat dari material yang elektronnya lebih sulit untuk berpindah).
 
-|            | Electric                       | Hydraulic                                |
+|            | Elektrik                       | Hidrolik                                 |
 |------------|--------------------------------|------------------------------------------|
-| Flow rate  | Current, *amps (coulombs/sec)* | Flow rate, *GPM (gallons/minute)*        |
-| Potential  | Voltage, *volts*               | Pressure, *psi (pound per square inch)*  |
-| Resistance | Resistance, *ohm (volts/amp)*  | Resistance, *psi/gpm*                    |
+| Laju aliran| Arus, *amp (coulomb/detik)*    | Laju aliran, *GPM (galon/menit)*         |
+| Potensial  | Tegangan, *volt*               | Tekanan, *psi (pound per inci persegi)*  |
+| Hambatan   | Hambatan, *ohm (volt/amp)*     | Hambatan, *psi/gpm*                      |
 
 <video autoplay loop muted playsinline aria-label="Animation of a water tank analogy for electrical circuits. As the water level rises, more water flows out of a hole at the bottom, illustrating how higher voltage produces more current.">
   <source src="assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** Here's a slightly different hydraulic analogy than the water plumbing system one described above. Here, we have a water tank filled with water with a hole at the bottom: as the water level increases, the pressure (voltage) on the water at the bottom of the tank also increases, which commensurately increases the amount of water flowing out of the hole. If we increase the hole size (decreasing resistance), more water (current) will flow. Note: the animation direction is showing *conventional current*. The water diagram based on an illustration in [Platt's *Make: Electronics* book](https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/).
+**Gambar.** Ini adalah analogi hidrolik yang sedikit berbeda dari sistem pipa air yang dijelaskan di atas. Di sini, kita memiliki sebuah tangki air yang diisi air dengan lubang di bagian bawahnya: seiring meningkatnya ketinggian air, tekanan (tegangan) pada air di bagian bawah tangki juga meningkat, yang secara sebanding meningkatkan jumlah air yang mengalir keluar dari lubang. Jika kita memperbesar ukuran lubang (memperkecil hambatan), lebih banyak air (arus) yang akan mengalir. Catatan: arah animasi menunjukkan *arus konvensional* (conventional current). Diagram air ini didasarkan pada ilustrasi dalam [buku *Make: Electronics* karya Platt](https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/).
 {: .fs-1 }
 
-Let's dive into each of these concepts more deeply, starting with current.
+Mari kita telusuri masing-masing konsep ini secara lebih mendalam, dimulai dari arus listrik.
 
-## What is current?
+## Apa itu arus listrik?
 
 <video autoplay loop muted playsinline aria-label="An animated gif showing current flowing in a simple circuit out of the positive terminal of a 9V battery through an LED and resistor and then back to the negative terminal of the 9V battery">
   <source src="assets/videos/CurrentFlow_EngineeringMindset.mp4" type="video/mp4" />
 </video>
-**Figure.** **[Current](https://en.wikipedia.org/wiki/Electric_current)** is the flow of charged particles—in this case, electrons—through a conductor. In the animation above, we are illustrating "electron flow" as a dotted green line, which flows from the negative terminal of the 9V battery, through an LED and resistor, and then back to the 9V battery to its positive terminal. Note that this is actually opposite from *conventional current* flow, but we'll get to that below. Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
+**Gambar.** **[Arus listrik](https://id.wikipedia.org/wiki/Arus_listrik)** adalah aliran partikel bermuatan—dalam hal ini, elektron—melalui sebuah konduktor. Pada animasi di atas, kita mengilustrasikan "aliran elektron" sebagai garis hijau putus-putus, yang mengalir dari terminal negatif baterai 9V, melewati LED dan resistor, lalu kembali lagi ke terminal positif baterai 9V. Perhatikan bahwa arah ini sebenarnya berlawanan dengan aliran *arus konvensional*, tetapi kita akan membahasnya di bawah. Animasi dari [The Engineering Mindset](https://youtu.be/kcL2_D33k3o).
 {: .fs-1 }
 
-*Current* is the flow of charged particles through a conductor. In circuits, these charged particles are *electrons* (negatively charged particles) propelled by an electromotive force (voltage) to move from "high pressure" to "low pressure" in a circuit.
+*Arus* adalah aliran partikel bermuatan melalui sebuah konduktor. Dalam rangkaian listrik, partikel bermuatan ini adalah *elektron* (partikel bermuatan negatif) yang didorong oleh gaya elektromotif (tegangan) untuk bergerak dari "tekanan tinggi" ke "tekanan rendah" dalam sebuah rangkaian.
 
-Electric current is similar to water current moving through a pipe. Just like with water where we can guide water flow through various pipe configurations and harness its kinetic energy (*e.g.,* by spinning a turbine), so too can we use wires to guide the flow of electrons and use it to power lamps, turn motors, or perform other work.
+Arus listrik mirip dengan arus air yang bergerak melalui pipa. Sama seperti air di mana kita bisa mengarahkan aliran air melalui berbagai konfigurasi pipa dan memanfaatkan energi kinetiknya (misalnya untuk memutar turbin), kita juga bisa menggunakan kabel untuk mengarahkan aliran elektron dan menggunakannya untuk menyalakan lampu, memutar motor, atau melakukan kerja lainnya.
 
-To measure the flow of water, we could count the number of water molecules flowing past a given cross-section of pipe in time $$t$$. Similarly, we can measure electric current by "counting" the number of charges flowing through a wire. Indeed, electric current $$I$$ is defined as the amount of charge $$Q$$ moving through a point in time $$t$$:
+Untuk mengukur aliran air, kita bisa menghitung jumlah molekul air yang melewati potongan melintang pipa tertentu dalam waktu $$t$$. Demikian pula, kita bisa mengukur arus listrik dengan "menghitung" jumlah muatan yang mengalir melalui kabel. Faktanya, arus listrik $$I$$ didefinisikan sebagai jumlah muatan $$Q$$ yang bergerak melewati suatu titik dalam waktu $$t$$:
 
 $$I = \frac{\Delta{Q}}{\Delta{t}}$$
 
-A [coulomb (C)](https://en.wikipedia.org/wiki/Coulomb) is the SI unit for *electric charge* and is approximately 6,240,000,000,000,000,000 electrons—that's 6.24 quintillion or $$6.24 × 10^{18}$$ electrons!
+Sebuah [coulomb (C)](https://id.wikipedia.org/wiki/Coulomb) adalah satuan SI untuk *muatan listrik* dan nilainya kira-kira setara dengan 6.240.000.000.000.000.000 elektron—yaitu 6,24 kuintiliun atau $$6.24 × 10^{18}$$ elektron!
 
-Rather than constantly describe current as the number of coulombs/second (or electrons/second) flowing through a wire—*i.e.,* "*Hey there, that wire is carrying $$1.872 × 10^{19}$$ electrons per second!*"—we, instead, use the SI unit of electric current called *amperes* or *amps* (A), which is simply equal to 1 coulomb per second:
+Daripada terus-menerus mendeskripsikan arus sebagai jumlah coulomb/detik (atau elektron/detik) yang mengalir melalui kabel—seperti, "*Hei, kabel itu menghantarkan $$1.872 × 10^{19}$$ elektron per detik!*"—kita lebih memilih menggunakan satuan SI dari arus listrik yang disebut *ampere* atau *amp* (A), yang nilainya sama dengan 1 coulomb per detik:
 
 $$1 A = 1 C / s$$
 
-Though you'll not need to do this when prototyping circuits, you could, of course, use these formulations to calculate the number of electrons passing through a cross-section of wire over time $$t$$. We do so below in the image simply for illustrative purposes: How many electrons pass a given point in 3s if a conductor is carrying 2A of current? Answer: $$6C$$ (6 coulombs) or $$3.74 × 10^{19}$$ electrons.
+Meskipun Anda tidak perlu melakukan ini saat membuat prototipe rangkaian, Anda tentu saja dapat menggunakan rumusan ini untuk menghitung jumlah elektron yang melewati potongan melintang kabel selama waktu $$t$$. Kami melakukannya di bawah ini pada gambar hanya untuk tujuan ilustrasi: Berapa banyak elektron yang melewati titik tertentu dalam waktu 3 detik jika sebuah konduktor menghantarkan arus sebesar 2A? Jawabannya: $$6C$$ (6 coulomb) atau $$3.74 × 10^{19}$$ elektron.
 
 ![An illustrative diagram showing how electrons flow through a conductor and how to calculate how many electrons pass through a point using I = change in Q divided by change in t](assets/images/ElectricCurrentDefinitionAndDiagram_ScherzAndMonk4thEditionpng.png)
-**Figure.** Using the formulas above, we can calculate the amount of electrons that pass through a cross-section of wire in three seconds if the wire is carrying 2A of current. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors*.
+**Gambar.** Menggunakan rumus di atas, kita dapat menghitung jumlah elektron yang melewati potongan melintang kabel dalam tiga detik jika kabel tersebut menghantarkan arus sebesar 2A. Gambar dari [Bab 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) dari buku *Practical Electronics for Inventors* karya Scherz dan Monk.
 {: .fs-1 }
 
 <!-- As electric charges move through a circuit from the high potential terminal to the low, they perform work (spin a motor, heat up electric coils, turn on a light bulb). By doing work, a charge loses its electric potential energy. For example, the conductive point just prior to a light bulb or motor is at a higher electric potential than the point just after. This loss in electric potential is referred to as a *voltage drop*, which we will explain later. -->
 
-### Building intuition for current
+### Membangun intuisi tentang arus listrik
 
-Importantly, just like your home plumbing system, where water flows instantly out of your tap when you open the valve (propelled by water pressure from a water tower, for example), so too does current flow instantly when a voltage is applied (propelled, for example, by a battery). And, critically, the water molecules that touch your hand did not flow all the way through your plumbing system in an instant. Instead, your pipes are completely filled with pressurized water—just as a conductive wire is filled with atoms. When you open the tap, the water molecules that touch your hands are the molecules pushing against that tap's valve (sort of like a first-in, first-out queue).
+Yang terpenting, sama seperti sistem pipa di rumah Anda, di mana air langsung mengalir keluar dari keran saat Anda membuka katupnya (didorong oleh tekanan air dari menara air, misalnya), arus listrik juga langsung mengalir ketika tegangan diberikan (didorong, misalnya, oleh baterai). Dan secara krusial, molekul air yang menyentuh tangan Anda tidak mengalir dari ujung sistem pipa Anda dalam sekejap. Sebaliknya, pipa-pipa Anda sudah terisi penuh dengan air bertekanan—sama seperti kabel konduktif yang sudah terisi penuh dengan atom. Ketika Anda membuka keran, molekul air yang menyentuh tangan Anda adalah molekul yang sebelumnya mendorong katup keran tersebut (semacam antrean *first-in, first-out*).
 
-This is similar to current in a circuit—atoms are tightly packed in a material with orbiting electrons. When a voltage is applied, these electrons start to "hop" from one atom to another through a conductor but do not instantly travel from A to B (see [video](https://youtu.be/OGa_b26eK2c?t=472)).
+Hal ini serupa dengan arus dalam rangkaian—atom-atom tersusun rapat di dalam suatu material dengan elektron yang mengorbit. Ketika tegangan diberikan, elektron-elektron ini mulai "melompat" dari satu atom ke atom lainnya melalui konduktor tetapi tidak langsung melesat secara instan dari titik A ke B (lihat [video](https://youtu.be/OGa_b26eK2c?t=472)).
 
 <video autoplay loop muted playsinline aria-label="An animated gif showing electrons hopping from atom to atom propelled by an applied voltage">
   <source src="assets/videos/ElectronsFlowingFromAtomToAtomToMakeCurrent.mp4" type="video/mp4" />
 </video>
 {: .mx-auto .align-center }
 
-**Figure.** An animation of charges (electrons) hopping from atom-to-atom propelled by an applied voltage. This is a simplified model showing a wire (conductor) that is only a single atom thick but helps illustrate the cascading movement of electrons in current flow. Image from [What is Electricity?](https://learn.sparkfun.com/tutorials/what-is-electricity) by [Sparkfun.com](https://www.sparkfun.com/).
+**Gambar.** Sebuah animasi muatan (elektron) yang melompat dari atom ke atom dengan dorongan tegangan yang diberikan. Ini adalah model sederhana yang menunjukkan kabel (konduktor) dengan ketebalan hanya satu atom saja, namun membantu mengilustrasikan gerakan beruntun dari elektron dalam aliran arus. Gambar dari artikel [What is Electricity?](https://learn.sparkfun.com/tutorials/what-is-electricity) oleh [Sparkfun.com](https://www.sparkfun.com/).
 {: .fs-1 }
 
-Another way to think about current flow is like that of a tube filled end-to-end with marbles. If a marble is inserted on the left, another marble will immediately exit the tube on the right. Even though each marble travels only a short distance, the transfer of motion is nearly instantaneous. With electricity, the overall effect from one end of a conductor to the other is at the speed of light; however, each individual electron travels through the conductor at a much slower pace. Indeed, the average speed at which electrons move through a wire due to an applied electric field such as from a battery is on the order of centimeters per hour (called the [drift velocity](https://en.wikipedia.org/wiki/Speed_of_electricity#Electric_drift))!
+Cara lain untuk memikirkan aliran arus adalah seperti sebuah tabung yang diisi penuh dari ujung ke ujung dengan kelereng. Jika sebuah kelereng dimasukkan dari sisi kiri, kelereng lain akan langsung keluar dari tabung di sisi kanan. Meskipun setiap kelereng hanya menempuh jarak yang pendek, transfer gerakannya terjadi hampir seketika. Pada listrik, efek keseluruhan dari satu ujung konduktor ke ujung lainnya terjadi secepat kecepatan cahaya; namun, setiap individu elektron bergerak melalui konduktor dengan kecepatan yang jauh lebih lambat. Faktanya, kecepatan rata-rata pergerakan elektron melalui kabel akibat medan listrik yang diterapkan (seperti dari baterai) adalah dalam skala sentimeter per jam (disebut [kecepatan hanyut / drift velocity](https://en.wikipedia.org/wiki/Speed_of_electricity#Electric_drift))!
 
 ![An image showing a tightly packed tube of single-file marbles. When a marble is inserted into the left side of the tube, a marble on the right side instantly exits.](assets/images/ElectronFlowMarbleTube_FromAllAboutCircuits.png)
 {: .mx-auto .align-center }
 
-**Figure.** You can think of electrons flowing through a circuit like marbles tightly packed in a tube. A marble does not need to traverse the entire tube to create motion. Instead, when a marble is inserted into the left side of the tube, a marble on the right side instantly exits. Image from [All About Circuits](https://www.allaboutcircuits.com/textbook/direct-current/chpt-1/conductors-insulators-electron-flow/). See also, [this video](https://youtu.be/8gvJzrjwjds?t=74) by Afrotechmods.
+**Gambar.** Anda dapat membayangkan elektron yang mengalir melalui rangkaian seperti kelereng yang tersusun rapat di dalam tabung. Sebuah kelereng tidak perlu melintasi seluruh tabung untuk menciptakan gerakan. Sebaliknya, ketika sebuah kelereng dimasukkan ke sisi kiri tabung, kelereng di sisi kanan akan langsung keluar. Gambar dari [All About Circuits](https://www.allaboutcircuits.com/textbook/direct-current/chpt-1/conductors-insulators-electron-flow/). Lihat juga, [video ini](https://youtu.be/8gvJzrjwjds?t=74) oleh Afrotechmods.
 {: .fs-1 }
 
 <!-- Another nice description of this marble analogy is from https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
 
-### What's conventional current vs. electron flow?
+### Apa bedanya arus konvensional vs. aliran elektron?
 
 <video autoplay loop muted playsinline aria-label="Side-by-side comparison of two identical circuits: one showing electron flow from negative to positive, the other showing conventional current from positive to negative.">
   <source src="assets/videos/ElectronFlowVsConventionalCurrent_PhetSimulation_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** In the animation above, we are showing the **same** two electrical circuits but the difference between *electron flow* and *current flow*. In circuits, negatively charged particles (electrons) move from the negative terminals of a battery (or voltage source) to the positive—this is called *electron flow*; however, when we model circuits (and use circuit formulas), we use *conventional current*, which moves in the opposite direction.
+**Gambar.** Pada animasi di atas, kami menunjukkan dua rangkaian listrik yang **sama** tetapi menampilkan perbedaan antara *aliran elektron* (electron flow) dan *aliran arus* (current flow). Dalam rangkaian, partikel bermuatan negatif (elektron) bergerak dari terminal negatif baterai (atau sumber tegangan) ke terminal positif—ini disebut *aliran elektron*; namun, ketika kita membuat model rangkaian (dan menggunakan rumus rangkaian), kita menggunakan *arus konvensional* (conventional current), yang bergerak ke arah sebaliknya.
 {: .fs-1 }
 
-In electric circuits, we use *conventional current* to model the flow of charge from the positive terminal of the voltage source to the negative; however, electrons actually move in the *opposite* direction (called *electron flow*). This causes great confusion!
+Dalam rangkaian listrik, kita menggunakan *arus konvensional* untuk memodelkan aliran muatan dari terminal positif sumber tegangan ke terminal negatif; namun, elektron sebenarnya bergerak ke arah *sebaliknya* (disebut *aliran elektron*). Hal ini sering memicu kebingungan besar!
 
-Why? Blame [Benjamin Franklin](https://hackaday.com/2017/07/17/conventional-current-vs-electron-current/). In early experiments (mid 1740s), Franklin determined that electricity appears to "flow" as if a liquid in solid material. He assumed that the flowing charges had positive signs and moved from positive to negative. It was not until 1897, however, that Sir Joseph Thomson determined that the real charge carrier in a wire was the electron and that electrons move from cathode (negative) to anode (positive).
+Mengapa? Persoalan ini berakar dari [Benjamin Franklin](https://hackaday.com/2017/07/17/conventional-current-vs-electron-current/). Pada eksperimen awal (pertengahan tahun 1740-an), Franklin menyimpulkan bahwa listrik tampaknya "mengalir" layaknya cairan di dalam material padat. Dia berasumsi bahwa muatan yang mengalir memiliki tanda positif dan bergerak dari positif ke negatif. Baru pada tahun 1897, Sir Joseph Thomson memastikan bahwa pembawa muatan yang sebenarnya di dalam kabel adalah elektron, dan elektron bergerak dari katode (negatif) ke anode (positif).
 
 ![An image of Thomson and Franklin thinking about how charge move in a conductor with Thomson actually getting it right: electrons are negatively charged and move from the negative source to the positive source.](assets/images/ConventionalCurrentVsElectronFlow_SherzAndMonk4thEdition.png)
 
-**Figure.** Franklin thought that positive charge carriers moved in a conductor from positive to negative. This is called the *conventional current* direction, which is still used today. Instead, as Thomson discovered, it's electrons that move in a conductor (which are negatively charged) and they move from negative to positive. This is called *electron flow*. Image from [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors*.
+**Gambar.** Franklin mengira bahwa pembawa muatan positif bergerak di dalam konduktor dari positif ke negatif. Ini disebut arah *arus konvensional*, yang masih digunakan hingga saat ini. Sebaliknya, seperti yang ditemukan oleh Thomson, elektronlah yang bergerak di dalam konduktor (yang bermuatan negatif) dan mereka bergerak dari negatif ke positif. Ini disebut *aliran elektron*. Gambar dari [Bab 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) dari buku *Practical Electronics for Inventors* karya Scherz dan Monk.
 {: .fs-1 }
 
-Despite this confusion, it turns out that as long as you're consistent, it does not matter: negative electrons flowing one way is equivalent to modeling positive charges flowing the other. So, we tend to use *conventional current* (modeling flow of charge from positive to negative) in electronics (*e.g.,* in diagrams, formulas, *etc.*). The math will still work out and even mnemonics like the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule) are based on conventional current (point thumb in direction of current $$I$$, see direction of magnetic field $$B$$).
+Terlepas dari kebingungan ini, ternyata selama Anda konsisten, hal itu tidak menjadi masalah: elektron negatif yang mengalir ke satu arah setara dengan memodelkan muatan positif yang mengalir ke arah sebaliknya. Oleh karena itu, kita cenderung menggunakan *arus konvensional* (memodelkan aliran muatan dari positif ke negatif) dalam elektronika (misalnya pada diagram, rumus, dll.). Perhitungan matematikanya akan tetap berfungsi dengan baik dan bahkan jembatan keledai seperti [kaidah tangan kanan](https://id.wikipedia.org/wiki/Kaidah_tangan_kanan) didasarkan pada arus konvensional (arahkan jempol ke arah arus $$I$$, maka jari lain menunjukkan arah medan magnet $$B$$).
 
 <!-- For more, see [Chapter 2](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) of Scherz and Monk's *Practical Electronics for Inventors* and this lovely [video](https://youtu.be/kcL2_D33k3o?t=224) by The Engineering Mindset. -->
 
-### Common operating currents in circuits
+### Arus operasional yang umum pada rangkaian listrik
 
-As you begin working in physical computing, you'll gain a better understanding of "*What's a lot of current?*" *vs.* "*What's a little current?*"
+Saat Anda mulai bekerja di bidang *physical computing*, Anda akan mendapatkan pemahaman yang lebih baik tentang "*Berapa nilai yang termasuk arus besar?*" vs. "*Berapa nilai yang termasuk arus kecil?*"
 
-With digital circuits, we typically work with **low amperages**. For example, an LED may require 2V but only ~20 milliamperes (milliamps or simply, mA) to light up—that's $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ electrons/second. Similarly, an individual pin on the Arduino might be able to supply up to 40mA or $$2.5 × 10^{17}$$ electrons/second. 
+Pada rangkaian digital, kita biasanya bekerja dengan **amperase rendah**. Sebagai contoh, sebuah LED mungkin memerlukan tegangan 2V tetapi hanya butuh arus sekitar ~20 miliampere (miliamp atau disingkat mA) untuk menyala—itu setara dengan $$(6.24 × 10^{18}) * 0.02 = 1.3 × 10^{17}$$ elektron/detik. Demikian pula, satu pin tunggal pada Arduino mungkin dapat menyuplai arus hingga 40mA atau $$2.5 × 10^{17}$$ elektron/detik. 
 
-Older standard USB ports (USB 2.0) supply 5V of electricity with a maximum current of 0.5A (500 mA). Modern laptop ports (USB 3.0 and standard USB-C) typically supply anywhere from 0.9A up to 3A at 5V. Furthermore, with the advent of USB Power Delivery (USB PD), modern USB-C ports can negotiate much higher voltages and currents—up to 240W (48V at 5A)—making USB-C a powerful and universal standard for driving even high-demand microcontrollers and peripherals.
+Port USB standar yang lebih lama (USB 2.0) menyuplai listrik 5V dengan arus maksimum 0.5A (500 mA). Port laptop modern (USB 3.0 dan USB-C standar) biasanya menyuplai antara 0.9A hingga 3A pada tegangan 5V. Terlebih lagi, dengan hadirnya *USB Power Delivery* (USB PD), port USB-C modern dapat menegosiasikan tegangan dan arus yang jauh lebih tinggi—hingga 240W (48V pada 5A)—menjadikan USB-C sebagai standar yang andal dan universal untuk menyalakan mikrokontroler serta perangkat periferal dengan kebutuhan daya tinggi.
 
 {: .note }
-Some electrical components, like [motors](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-a-high-current-load/) or a [long string of LED lights](https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/), require more current (called "[high current loads](https://itp.nyu.edu/physcomp/lessons/electronics/transistors-relays-and-controlling-high-current-loads/)") than a microcontroller or USB 2.0 port can supply. In these cases, we can use an external power supply controlled by a transistor.
+Beberapa komponen listrik, seperti [motor](https://itp.nyu.edu/physcomp/labs/motors-and-transistors/using-a-transistor-to-control-a-high-current-load/) atau [rangkaian lampu LED yang panjang](https://www.eerkmans.nl/powering-lots-of-leds-from-arduino/), membutuhkan arus yang lebih besar (disebut "*high current loads*") daripada yang dapat disuplai oleh mikrokontroler atau port USB 2.0. Dalam kasus ini, kita dapat menggunakan catu daya eksternal yang dikendalikan oleh sebuah transistor.
 
-## What is voltage?
+## Apa itu tegangan listrik?
 
 <video autoplay loop muted playsinline aria-label="Animation showing voltage as a force that pushes electrons through a circuit, similar to water pressure in a pipe.">
   <source src="assets/videos/VoltageElectromotiveForce_EngineeringMindset.mp4" type="video/mp4" />
 </video>
-**Figure.** You can think of *voltage* as what "pushes" electrons around a circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8) video by The Engineering Mindset.
+**Gambar.** Anda dapat membayangkan *tegangan* sebagai kekuatan yang "mendorong" elektron di sekitar rangkaian listrik. Animasi dari video [Voltage Explained](https://youtu.be/w82aSjLuD_8) oleh The Engineering Mindset.
 {: .fs-1 }
 
-OK, so if current is the *flow* of charge in a circuit, what's compelling these charges to move?
+Baik, jadi jika arus adalah *aliran* muatan dalam sebuah rangkaian, apa yang memaksa muatan-muatan tersebut bergerak?
 
-Similar to magnets, charges with the *same sign* repel each other (*e.g.,* electrons repel each other because they are all negatively charged) and charges with opposite signs *attract* each other (*e.g.,* electrons and protons). A battery uses chemical reactions to cause a *build up* of electrons at the negative terminal—this creates a "pressure" or electrical difference between the battery's two terminals.
+Mirip seperti magnet, muatan dengan *tanda yang sama* akan saling tolak-menolak (misalnya elektron saling tolak-menolak karena semuanya bermuatan negatif) dan muatan dengan tanda berbeda akan *saling tarik-menarik* (misalnya elektron dan proton). Baterai menggunakan reaksi kimia untuk menghasilkan *penumpukan* elektron di terminal negatif—hal ini menciptakan "tekanan" atau perbedaan listrik antara kedua terminal baterai.
 
-When you connect the battery's terminals (*i.e.,* close the circuit), electrons flow to rearrange this imbalance from the negative terminal to the positive. But remember, with conventional current, we model charge movement in the other direction, so we show current going from the positive terminal to the negative; in this case, we refer to charges at the positive terminal as having high potential energy and those at the negative terminal as having low potential energy.
+Ketika Anda menghubungkan terminal-terminal baterai tersebut (artinya menutup rangkaian), elektron mengalir untuk menyeimbangkan ketidakseimbangan ini dari terminal negatif ke terminal positif. Namun ingat, dengan arus konvensional, kita memodelkan pergerakan muatan ke arah sebaliknya, sehingga kita menunjukkan arus berjalan dari terminal positif ke negatif; dalam hal ini, kita menyebut muatan di terminal positif memiliki energi potensial tinggi dan muatan di terminal negatif memiliki energi potensial rendah.
 
-In short, you can think of voltage like pressure in a water pipe: the more pressure, the more water is forced through a pipe. Similarly, by increasing voltage, we can "push" more electrons through a wire.
+Singkatnya, Anda bisa menganalogikan tegangan seperti tekanan di dalam pipa air: semakin besar tekanannya, semakin banyak air yang dipaksa mengalir melalui pipa. Begitu pula dengan meningkatkan tegangan, kita bisa "mendorong" lebih banyak elektron melalui kabel.
 
-Indeed, Wikipedia refers to **[Voltage](https://en.wikipedia.org/wiki/Voltage)** as "electric pressure", "electromotive force", and "electric potential difference" to capture this propelling (or repelling) effect. This is a reasonable conceptual approximation: you can think of voltage as a measure of "pressure" that causes current to flow. Between two components, if there is an electric potential difference of 0V, no current will flow.
+Bahkan, Wikipedia merujuk **[Tegangan listrik](https://id.wikipedia.org/wiki/Tegangan_listrik)** sebagai "tekanan listrik", "gaya elektromotif", dan "perbedaan potensial listrik" untuk menggambarkan efek dorongan (atau tolakan) ini. Ini adalah pendekatan konseptual yang masuk akal: Anda dapat menganggap tegangan sebagai ukuran "tekanan" yang menyebabkan arus mengalir. Di antara dua komponen, jika perbedaan potensial listriknya adalah 0V, maka tidak akan ada arus yang mengalir.
 
-<!-- As [Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) state, "a voltage placed across a conductor gives rise to an *electromotive force (EMF)* that is responsible for giving all free electrons within the conductor a push."  -->
+<!-- As [Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) state, "a voltage placed across a conductor gives rise to an *electromotive force (EMF)* that is responsible for giving all free electrons within the conductor a push." -->
 
 <!-- https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
 https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html
@@ -191,21 +191,21 @@ https://learning.oreilly.com/library/view/practical-electronics-components/97814
 https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/html/488495_1_En_5_Chapter.xhtml
 https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current -->
 
-### A more precise definition
+### Definisi yang lebih presisi
 
-More precisely, *voltage* is the work needed to bring a charge from one location to another in an electric field. Voltage gives us an idea of how much "pushing" force an electric field has, and is defined as the electric potential energy per unit charge (*e.g.,* electron), which is measured in joules per coulomb (volts):
+Lebih tepatnya, *tegangan* adalah usaha yang diperlukan untuk memindahkan suatu muatan dari satu lokasi ke lokasi lain di dalam medan listrik. Tegangan memberikan kita gambaran tentang seberapa besar gaya "dorong" yang dimiliki oleh medan listrik, dan didefinisikan sebagai energi potensial listrik per satuan muatan (misalnya elektron), yang diukur dalam satuan joule per coulomb (volt):
 
-$$1\ V = 1\ joule\ (of\ work) / 1\ coulomb\ (of\ charge)$$
+$$1\ V = 1\ joule\ (usaha) / 1\ coulomb\ (muatan)$$
 
-As joule is a unit of *energy*, voltage introduces a very important and necessary concept: the potential to do *work* (*e.g.,* to power a light bulb, spin a motor)!
+Karena joule adalah satuan *energi*, tegangan memperkenalkan konsep yang sangat penting dan diperlukan: potensi untuk melakukan *usaha* (misalnya untuk menyalakan lampu, memutar motor)!
 
 <video autoplay loop muted playsinline aria-label="Split-screen animation comparing an electrical circuit to a water wheel circuit, showing how charges gain potential energy in a battery and lose it performing work, just as water gains potential energy when pumped uphill.">
   <source src="assets/videos/VoltagePotentialWaterWheelCircuitAnalogy_TrimmedAndCropped_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** An animation showing an analogy between an electrical circuit and a "water" circuit. In a battery, the electric potential of charges increase as they move to the positive terminal (higher voltage)—this potential drops as work is performed (*e.g.,* flowing through a resistor). Similarly, water molecules being pumped to higher elevations have *higher potential* to do work; this potential decreases as the water flows to lower elevations or is used to perform work (*e.g.,* spin a turbine). Note that no charges (or water molecules) are lost in these systems—but the potential energy of these particles is transformed to other forms (*e.g.,* kinetic, heat).
+**Gambar.** Sebuah animasi yang menunjukkan analogi antara rangkaian listrik dan rangkaian "air". Di dalam baterai, potensial listrik dari muatan meningkat saat mereka bergerak ke terminal positif (tegangan lebih tinggi)—potensial ini turun ketika usaha dilakukan (misalnya mengalir melewati resistor). Demikian pula, molekul air yang dipompa ke tempat yang lebih tinggi memiliki *potensial lebih tinggi* untuk melakukan usaha; potensial ini berkurang saat air mengalir ke tempat yang lebih rendah atau digunakan untuk melakukan usaha (misalnya memutar turbin). Perhatikan bahwa tidak ada muatan (atau molekul air) yang hilang dalam sistem ini—tetapi energi potensial dari partikel-partikel ini diubah ke bentuk lain (misalnya kinetik, panas).
 {: .fs-1 }
 
-And just like we can use "energy" of flowing water to do work—*e.g.,* to spin a turbine—so too can we use flowing current to do work. As electrons move through a circuit and perform work (drive a motor, heat up a wire, turn on a light), they begin to lose their "electric potential." See animation above.
+Dan sama seperti kita bisa menggunakan "energi" dari air yang mengalir untuk melakukan usaha—misalnya untuk memutar kincir—kita juga bisa menggunakan arus yang mengalir untuk melakukan usaha. Saat elektron bergerak melalui rangkaian dan melakukan usaha (menggerakkan motor, memanaskan kabel, menyalakan lampu), mereka mulai kehilangan "potensial listrik" mereka. Lihat animasi di atas.
 
 <!-- ### Example problems
 
@@ -229,7 +229,7 @@ So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the ne
 
 <!-- another fun gravity analogy: https://electronics.stackexchange.com/a/182450 -->
 
-<!-- In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*.  -->
+<!-- In a battery-powered circuit, electrons are repelled by the negative battery terminal (which has an imbalance of negative charges) and attracted to the positive battery terminal (which has an imbalance of positive charges). These charge "buildups" create an electromotive force that moves charge through the circuit. We call this movement *current*. -->
 
 <!-- This is similar to water flow in a pipe (hydraulics) or air flow in a tube (pneumatics)—all which flow from "high pressure" to "low pressure." -->
 
@@ -237,11 +237,11 @@ So, it takes 18J to move 2C of charge ($$1.25 x 10^{19}$$ electrons) from the ne
 
 <!-- "Another way to think of voltage is as the electric potential difference between two points in an electric field. It is similar to the difference in the potential energy of a cannonball at the top of a ladder as opposed to one at the top of a tall tower. Both cannonballs exist in the earth's gravitational field, they both have potential energy, and it took some work to get them both into position. When they are released, the cannonball on the top of the tower will have more energy when it hits the ground than the cannonball dropped from the top of the ladder, because it had a larger potential energy due to its position." From https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html -->
 
-### Common operating voltages
+### Tegangan operasional yang umum
 
-In digital circuits, common operating voltages are relatively small—like 3.3V or 5V—compared to the voltage supplied by your wall outlet (which, in the US, is 120V!). The popular [ESP32](https://www.espressif.com/en/products/socs/esp32) microcontroller operates at 3.3V while the [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) and [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) boards operate on 5V. My Apple iPhone 8 USB-A Lightning charger outputs 5V and can supply up to 2A. Newer Apple chargers, like the Apple 20W USB-C Power Adapter, can supply 9V at 2.2A (it can fast charge an iPhone 17 to about 50% in 30 mins).
+Dalam rangkaian digital, tegangan operasional yang umum relatif kecil—seperti 3.3V atau 5V—jika dibandingkan dengan tegangan yang disuplai oleh stopkontak dinding Anda (yang di AS sebesar 120V dan di Indonesia sebesar 220V!). Mikrokontroler populer seperti [ESP32](https://www.espressif.com/en/products/socs/esp32) beroperasi pada tegangan 3.3V sedangkan papan [Arduino Uno](https://store.arduino.cc/usa/arduino-uno-rev3) dan [Arduino Leonardo](https://www.arduino.cc/en/Main/Arduino_BoardLeonardo) beroperasi pada 5V. Pengisi daya USB-A Lightning Apple iPhone 8 saya mengeluarkan output 5V dan dapat menyuplai arus hingga 2A. Pengisi daya Apple yang lebih baru, seperti *Apple 20W USB-C Power Adapter*, dapat menyuplai 9V pada 2.2A (dapat mengisi daya cepat iPhone 17 hingga sekitar 50% dalam waktu 30 menit).
 
-Importantly, you do not want to supply a voltage beyond an electric component's specified input voltage or you risk damaging things. So, it's essential that you read a component's data sheet before using it (which we will learn how to do in a future lesson).
+Penting untuk diperhatikan, Anda tidak boleh menyuplai tegangan melebihi batas tegangan input yang ditentukan dari suatu komponen listrik karena Anda berisiko merusak komponen tersebut. Oleh karena itu, sangat penting bagi Anda untuk membaca lembar data (*data sheet*) komponen sebelum menggunakannya (yang akan kita pelajari caranya pada pembelajaran mendatang).
 
 <!-- **TODO: UPDATE THIS DESCRIPTION**
 Some potential references:
@@ -249,40 +249,40 @@ Some potential references:
 - https://learning.oreilly.com/library/view/learn-electronics-with/9781680454420/#toc
 - https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/12_Chapter_01.xhtml#ch01 -->
 
-### Relative voltages and ground
+### Tegangan relatif dan ground
 
-By definition, voltage is the *difference* in electric potential between **two points**. When we actually start measuring voltages in a circuit (using a multimeter), you'll observe that we can't just place a single probe on the circuit. Instead, we have to place **two probes** in different locations to measure the voltage difference between them (also called the **voltage drop**).
+Berdasarkan definisinya, tegangan adalah *perbedaan* potensial listrik antara **dua titik**. Ketika kita mulai mengukur tegangan dalam sebuah rangkaian (menggunakan multimeter), Anda akan melihat bahwa kita tidak bisa hanya menempelkan satu kabel colok (*probe*) pada rangkaian. Sebaliknya, kita harus menaruh **dua probe** di lokasi berbeda untuk mengukur selisih tegangan di antara keduanya (juga disebut **tegangan jatuh** atau **voltage drop**).
 
-To simplify calculations, we select some point on the circuit—typically the point with the least electric potential (*e.g.,* wires connected to the negative terminal of a battery)—as 0 volts. As [Bartlett](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/) notes (Chapter 4.3), "*This 'zero point' goes by several names, the most popular of which is **ground** (often abbreviated as **GND**). It is called the ground because, historically, the physical ground has often been used as a reference voltage for circuits*."
+Untuk menyederhanakan perhitungan, kita memilih suatu titik pada rangkaian—biasanya titik dengan potensial listrik paling rendah (misalnya kabel yang terhubung ke terminal negatif baterai)—sebagai 0 volt. Seperti yang dicatat oleh [Bartlett](https://learning.oreilly.com/library/view/electronics-for-beginners/9781484259795/) (Bab 4.3), "*'Titik nol' ini memiliki beberapa nama, yang paling populer di antaranya adalah **ground** (sering disingkat **GND**). Dinamakan ground karena secara historis, tanah fisik bumi sering digunakan sebagai tegangan acuan untuk rangkaian listrik*."
 
-Returning to the gravity-voltage analogy, how much potential energy does a rock have once it reached the ground? None! For the rock to gain potential energy, we need to do *work* to lift the rock.
+Kembali ke analogi gravitasi-tegangan, seberapa besar energi potensial yang dimiliki sebuah batu setelah menyentuh tanah? Tidak ada! Agar batu tersebut mendapatkan energi potensial, kita perlu melakukan *usaha* untuk mengangkat batu tersebut.
 
-### Danger: high voltage!
+### Bahaya: tegangan tinggi!
 
-You may have seen warnings like: *DANGER: HIGH VOLTAGE* but you may have also heard contradictory phrases like "*it's not the voltage that kills, it's the current.*" How can both be true?
+Anda mungkin pernah melihat peringatan seperti: *DANGER: HIGH VOLTAGE* tetapi Anda mungkin juga pernah mendengar kalimat kontradiktif seperti "*bukan tegangan yang membunuh, melainkan arus listrik.*" Bagaimana keduanya bisa sama-sama benar?
 
-Well, in some regards: they are. High voltage has the potential to push more current through your body than low voltages—and it's the *current* that can burn tissue, impede muscle control, and fibrillate your heart. Indeed, humans can feel DC currents as low as 0.6–1.0mA pass through their bodies, 40–60mA is painful, and ~90mA and above is sufficient to induce cardiac/respiratory arrest.
+Pada beberapa aspek: keduanya memang benar. Tegangan tinggi memiliki potensi untuk mendorong arus listrik yang lebih besar melalui tubuh Anda dibandingkan tegangan rendah—dan *arus listrik* itulah yang dapat membakar jaringan tubuh, mengganggu kendali otot, dan menyebabkan fibrilasi pada jantung Anda. Faktanya, manusia dapat merasakan arus DC sekecil 0,6–1,0mA yang mengalir melalui tubuh mereka, 40–60mA terasa menyakitkan, dan sekitar ~90mA ke atas sudah cukup untuk memicu henti jantung/pernapasan.
 
-But—and this is an important but—our bodies offer fairly high resistance. And the voltages we work with (typically 3.3V and 5V) are simply not sufficiently high to "push" current through our bodies. However, wet skin can drop your resistance and metal jewelry can cause incidental shorts (and possibly thermal burns). So, be careful.
+Tetapi—dan ini adalah poin penting—tubuh kita menawarkan hambatan yang terbilang cukup tinggi. Dan tegangan yang kita gunakan untuk praktik (biasanya 3.3V dan 5V) tidak cukup tinggi untuk "mendorong" arus melewati tubuh kita. Walau demikian, kulit yang basah dapat menurunkan hambatan tubuh Anda dan perhiasan logam dapat menyebabkan hubungan singkat yang tidak disengaja (dan kemungkinan luka bakar termal). Jadi, tetaplah berhati-hati.
 
-Generally, the most dangerous electrical thing in your household is the line voltage coming out of your home outlets (120V at 60Hz in the US and 240V at 50Hz in many other countries). Never open any electronic device while it's plugged in and, even then, be careful (charged capacitors can still maintain high voltages for a time).
+Umumnya, hal kelistrikan yang paling berbahaya di rumah Anda adalah tegangan jala-jala yang keluar dari stopkontak rumah Anda (120V pada 60Hz di AS dan 220V pada 50Hz di Indonesia dan banyak negara lain). Jangan pernah membuka perangkat elektronik apa pun saat masih terhubung ke stopkontak, dan bahkan setelahnya pun tetaplah berhati-hati (kapasitor yang bermuatan masih dapat menyimpan tegangan tinggi untuk beberapa waktu).
 
-For more on electrical safety, see this [write-up on AllAboutCircuits.com](https://www.allaboutcircuits.com/textbook/direct-current/chpt-3/ohms-law-again/) or this section on [Safety (Chapter 7.1) in Practical Electronics for Inventors](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/18_Chapter_07.xhtml).
+Untuk informasi lebih lanjut tentang keselamatan listrik, lihat [tulisan di AllAboutCircuits.com](https://www.allaboutcircuits.com/textbook/direct-current/chpt-3/ohms-law-again/) atau bagian [Keselamatan (Bab 7.1) dalam Practical Electronics for Inventors](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/18_Chapter_07.xhtml).
 
-You can also watch [this video](https://youtu.be/hp97GjuULX8) by popular YouTuber [ElectroBOOM](https://www.youtube.com/channel/UCJ0-OtVpF0wOKEqT2Z1HEtA), which examines his pain tolerance between AC and DC.
+Anda juga dapat menonton [video ini](https://youtu.be/hp97GjuULX8) oleh YouTuber populer [ElectroBOOM](https://www.youtube.com/channel/UCJ0-OtVpF0wOKEqT2Z1HEtA), yang menguji toleransi rasa sakitnya terhadap listrik AC dan DC.
 
 <!-- Returning to the [water tank analogy](assets/videos/WaterCircuitAnalogy_Trimmed_ByJonFroehlich.mp4) from the Introduction, how much potential to do work does water have once it's flowed out of the hole and onto the ground? None! It's lost all of its energy. Likewise, when an electric charge reaches ground, it no longer has electric potential for work. -->
 
-### How can we increase pressure?
+### Bagaimana kita bisa meningkatkan tekanan?
 
-A battery has an imbalanced electric charge built up between its positive and negative leads. When a circuit is connected, electric charges (electrons) flow to "correct" this imbalance. The larger the imbalance (*i.e.,* the higher voltage), the greater the "push" and the more electrons that flow (higher current).
+Baterai memiliki ketidakseimbangan muatan listrik yang terbentuk di antara kutub positif dan negatifnya. Ketika suatu rangkaian terhubung, muatan listrik (elektron) mengalir untuk "memperbaiki" ketidakseimbangan ini. Semakin besar ketidakseimbangan tersebut (yaitu semakin tinggi tegangan), semakin besar "dorongan" yang terjadi dan semakin banyak elektron yang mengalir (arus lebih tinggi).
 
-If you connect two batteries in series (*i.e.,* stack them), you increase their ability to "push" electrons—indeed, you sum the battery voltages together. So, two standard alkaline 1.5V AA batteries in series will have a 3V potential difference, which can "push" more electrons around a circuit—see the animation below.
+Jika Anda menghubungkan dua baterai secara seri (artinya ditumpuk), Anda meningkatkan kemampuan mereka untuk "mendorong" elektron—secara harfiah, Anda menjumlahkan tegangan baterai tersebut bersama-sama. Jadi, dua baterai AA alkalin standar 1.5V secara seri akan memiliki perbedaan potensial sebesar 3V, yang dapat "mendorong" lebih banyak elektron di sekitar rangkaian—lihat animasi di bawah ini.
 
 <video autoplay loop muted playsinline aria-label="Animation showing two 1.5V batteries connected in series to produce 3V total, with increased electron flow through the circuit.">
   <source src="assets/videos/VoltageBatteriesInSeries_CroppedAndTrimmed2_EngineeringMindset.mp4" type="video/mp4" />
 </video>
-**Figure.** When you connect batteries in series, you increase the "pushing" force—indeed, you sum the battery voltages together (so, 1.5V + 1.5V = 3V in total). More voltage, more pressure. More pressure, more electrons are "pushed" through the circuit. Animation from the [Voltage Explained](https://youtu.be/w82aSjLuD_8?t=183) video by The Engineering Mindset.
+**Gambar.** Ketika Anda menghubungkan baterai secara seri, Anda meningkatkan gaya "dorong"—secara harfiah, Anda menjumlahkan tegangan baterai bersama-sama (jadi, 1.5V + 1.5V = total 3V). Lebih banyak tegangan, lebih banyak tekanan. Lebih banyak tekanan, lebih banyak elektron yang "didorong" melalui rangkaian. Animasi dari video [Voltage Explained](https://youtu.be/w82aSjLuD_8?t=183) oleh The Engineering Mindset.
 {: .fs-1 }
 
 <!-- See https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->
@@ -290,103 +290,104 @@ If you connect two batteries in series (*i.e.,* stack them), you increase their 
 <!-- See also: http://andnowforelectronics.com/notes/voltage-and-current/ -->
 
 {: .note }
-> **Base units.** As you learn and begin analyzing electrical circuits, it's important to pay attention to *units*. The base unit of voltage is volts (V), the base unit of current is amperes or amps (A), and the base unit of resistance is ohms (Ω). As noted, with digital circuits, we often work with voltages between 0–5V (and sometimes 9V or 12V) but amperages are often in the milliamp range—like 0.02A or 0.1A—and common resistances include 220Ω, 1,000Ω, 2,200Ω, and even 10,000Ω. Typically, however, you'll see these written as 20mA and 100mA and 1kΩ, 2.2kΩ, and 10kΩ respectively. Thus, it's important to carefully track units and convert values to base units for analysis. We'll talk more about this in the [Ohm's Law](ohms-law.md) lesson.
+> **Satuan dasar.** Saat Anda belajar dan mulai menganalisis rangkaian listrik, penting untuk memperhatikan *satuan*. Satuan dasar dari tegangan adalah volt (V), satuan dasar dari arus adalah ampere atau amp (A), dan satuan dasar dari hambatan adalah ohm (Ω). Seperti yang telah dicatat, pada rangkaian digital kita sering bekerja dengan tegangan antara 0–5V (dan terkadang 9V atau 12V), tetapi arus listrik sering kali berada dalam kisaran miliamp—seperti 0.02A atau 0.1A—dan hambatan yang umum digunakan meliputi 220Ω, 1.000Ω, 2.200Ω, dan bahkan 10.000Ω. Namun biasanya, Anda akan melihat nilai-nilai ini ditulis masing-masing sebagai 20mA dan 100mA serta 1kΩ, 2.2kΩ, dan 10kΩ. Oleh karena itu, penting untuk melacak satuan dengan cermat dan mengonversi nilai ke satuan dasar untuk keperluan analisis. Kita akan membahas lebih banyak tentang hal ini pada pembelajaran [Hukum Ohm](ohms-law.md).
 
-## What is electrical resistance?
+## Apa itu hambatan listrik?
 
 <video autoplay loop muted playsinline aria-label="Animation comparing electron flow through copper wire versus iron wire, showing more collisions and heat generation in the higher-resistance iron wire.">
   <source src="assets/videos/CopperVsIronWireResistanceElectronFlow_EngineeringMindset.mp4" type="video/mp4" />
 </video>
-**Figure.** As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a resistance. In the animation above, notice how the iron wire has more collisions than the copper wire. Iron is ~17% as conductive as copper. At 20°C, iron has an electrical resistivity of 96.1 nanoohm-meters while copper has a resistivity of 16.8 nanoohm-meters. Notice the halo around the iron wire: this is to illustrate how some of the "kinetic" or movement energy of electrons gets converted into heat or light through those collisions. Indeed, this is how incandescent lightbulbs, toaster ovens, and electric space heaters work! Animation from the [How Electricity Works](https://youtu.be/mc979OhitAg?t=322) video by The Engineering Mindset.
+**Gambar.** Saat elektron bergerak melalui suatu material, mereka dapat bertabrakan dengan beberapa atom atau elektron lainnya. Tabrakan ini menciptakan sebuah *hambatan* (resistance) terhadap arus listrik. Yang patut dicatat dan penting, hambatan ini memperlambat **seluruh** pergerakan muatan (arus) di dalam rangkaian, bukan hanya muatan yang melewati material resistif tersebut.
+Analogi yang umum, meskipun tidak sepenuhnya sempurna, untuk hambatan listrik adalah *gesekan mekanis*; sebuah resistor mengubah energi listrik menjadi energi panas (dan menyebabkan tegangan jatuh) sama seperti gesekan mengubah energi mekanik kinetik menjadi panas. Di dalam animasi di atas, perhatikan bagaimana kawat besi memiliki lebih banyak tabrakan dibandingkan kawat tembaga. Besi memiliki tingkat konduktivitas sekitar ~17% dari tembaga. Pada suhu 20°C, besi memiliki resistivitas listrik sebesar 96,1 nanoohm-meter sedangkan tembaga memiliki resistivitas 16,8 nanoohm-meter. Perhatikan lingkaran cahaya di sekitar kawat besi: ini untuk mengilustrasikan bagaimana sebagian energi "kinetik" atau gerakan elektron diubah menjadi panas atau cahaya melalui tabrakan tersebut. Sungguh, ini adalah prinsip kerja dari lampu pijar, pemanggang roti (toaster), dan pemanas ruangan elektrik! Animasi dari video [How Electricity Works](https://youtu.be/mc979OhitAg?t=322) oleh The Engineering Mindset.
 {: .fs-1 }
 
-As electrons move through a material, they may collide with some atoms or other electrons. These collisions create a *resistance* to the electrical current. Notably, and importantly, this resistance slows **all** of the charge movement (current) in the circuit, not just those charges passing through the resistive material.
+Saat elektron bergerak melalui suatu material, mereka dapat bertabrakan dengan beberapa atom atau elektron lainnya. Tabrakan ini menciptakan sebuah *hambatan* terhadap arus listrik. Yang patut dicatat dan penting, hambatan ini memperlambat **seluruh** pergerakan muatan (arus) di dalam rangkaian, bukan hanya muatan yang melewati material resistif tersebut.
 
-A common, but imperfect, analogy for electrical resistance is *mechanical friction*; a resistor converts electrical energy to heat energy (and causes a voltage drop) just as friction transforms kinetic mechanical energy to heat.
+Analogi yang umum, meskipun tidak sepenuhnya sempurna, untuk hambatan listrik adalah *gesekan mekanis*; sebuah resistor mengubah energi listrik menjadi energi panas (dan menyebabkan tegangan jatuh) sama seperti gesekan mengubah energi mekanik kinetik menjadi panas.
 
 <!-- **TODO: think of a water [flow through a narrow pipe](https://youtu.be/F_vLWkkOETI?t=267)** -->
 
-Depending on their atomic composition, some materials have lower resistance than others. Metals like silver, copper, and gold are *good* conductors—they offer *low* resistance—because they have loosely bound electrons in the outer shells of their atoms. These electrons are easily displaceable and, with an applied electric field, can be "pushed" from atom-to-atom within the material to form a current.
+Tergantung pada komposisi atomnya, beberapa material memiliki hambatan yang lebih rendah daripada yang lain. Logam seperti perak, tembaga, dan emas adalah konduktor yang *baik*—mereka menawarkan hambatan yang *rendah*—karena mereka memiliki elektron yang terikat longgar di kulit terluar atom mereka. Elektron-elektron ini mudah berpindah tempat dan, dengan adanya medan listrik yang diterapkan, dapat "didorong" dari atom ke atom di dalam material untuk membentuk arus.
 
-The SI unit of electrical resistance is the ohm (Ω). The direct inverse of resistance is *conductance*. Materials with low resistance are called *conductors*. In contrast, materials such as glass, rubber, and air have high resistance and poor conductivity ("low electron mobility")—these materials are called *insulators*.
+Satuan SI untuk hambatan listrik adalah ohm (Ω). Kebalikan langsung dari hambatan adalah *konduktansi*. Material dengan hambatan rendah disebut *konduktor*. Sebaliknya, material seperti kaca, karet, dan udara memiliki hambatan yang tinggi dan konduktivitas yang buruk ("mobilitas elektron rendah")—material ini disebut *isolator*.
 
 ![This image shows PVC insulated wire with two annotations: the annotation on the left points to the internal part of the wire, which is highly conductive and made of copper. The annotation on the right points to the insulation around the wire, which has low conductivity and is made of PVC.](assets/images/PVCWrappedWire-ConductorVsInsulator.png)
-**Figure.** PVC-insulated copper wire. The copper core (left annotation) is a good **conductor** with low resistance, while the PVC coating (right annotation) is an **insulator** with high resistance, preventing current from leaking out of the wire or shocking the user.
+**Gambar.** Kabel tembaga berisolasi PVC. Inti tembaga (keterangan kiri) adalah **konduktor** yang baik dengan hambatan rendah, sedangkan lapisan PVC (keterangan kanan) adalah **isolator** dengan hambatan tinggi, mencegah arus bocor keluar dari kabel atau menyengat pengguna.
 {: .fs-1 }
 
-The resistance $$R$$ of an object is defined as the ratio of voltage $$V$$ across it to current $$I$$ through it while conductance $$G$$ is the reciprocal:
+Hambatan $$R$$ dari suatu objek didefinisikan sebagai rasio tegangan $$V$$ yang melintasinya terhadap arus $$I$$ yang mengalir melaluinya, sedangkan konduktansi $$G$$ adalah kebalikannya:
 
 $$R = \frac{V}{I}$$, $$G = \frac{1}{R}$$
 
-With enough voltage (pressure), almost any material can conduct electrical current (even air, as evident by lightning). The resistance (or conductance) of a wire is not just a function of material type but also its temperature and its size (both length and thickness). In short, for metal wires, resistance drops with increases to wire diameter. Conversely, resistance increases as wire length or temperature increases.
+Dengan tegangan (tekanan) yang cukup besar, hampir semua material dapat menghantarkan arus listrik (bahkan udara sekalipun, seperti yang terbukti pada kilat petir). Hambatan (atau konduktansi) dari sebuah kabel bukan hanya fungsi dari jenis material saja tetapi juga suhunya dan ukurannya (baik panjang maupun ketebalannya). Singkatnya, untuk kabel logam, hambatan akan menurun seiring dengan bertambahnya diameter kabel. Sebaliknya, hambatan akan meningkat seiring bertambahnya panjang kabel atau meningkatnya suhu.
 
-[Wikipedia](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) provides a nice water-based analogy:
+[Wikipedia](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) menyediakan analogi berbasis air yang bagus:
 
-> "passing current through a highly resistive material is like pushing water through a pipe full of sand. In contrast, passing current through a low-resistivity material is like pushing water through an empty pipe. If the pipes are the same size and shape, the pipe full of sand has higher resistance to flow. Resistance, however, is not solely determined by the presence or absence of sand. It also depends on the length and width of the pipe: short or wide pipes have lower resistance than narrow or long pipes."
+> "mengalirkan arus melalui material berhambatan tinggi adalah seperti mendorong air melalui pipa yang penuh dengan pasir. Sebaliknya, mengalirkan arus melalui material berresistivitas rendah adalah seperti mendorong air melalui pipa yang kosong. Jika pipa-pipa tersebut memiliki ukuran dan bentuk yang sama, pipa yang penuh dengan pasir memiliki hambatan aliran yang lebih tinggi. Namun, hambatan tidak hanya ditentukan oleh ada atau tidaknya pasir. Hal itu juga bergantung pada panjang dan lebar pipa: pipa yang pendek atau lebar memiliki hambatan yang lebih rendah daripada pipa yang sempit atau panjang."
 {: .fs-4 }
 
-To help illustrate this idea visually, [Professor Squier](http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf) created some helpful sketches—see the caption for more details:
+Untuk membantu mengilustrasikan ide ini secara visual, [Profesor Squier](http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf) membuat beberapa sketsa yang sangat membantu—lihat keterangan gambar untuk detail lebih lanjut:
 
 ![Image shows a water analogy for electricity. There are two pipes visible: one filled with gravel (less resistance) and one filled with clay (more resistance). There is an equal amount of water pressure (voltage) "pushing" water through both pipes. The pipe with less resistance (gravel) will have more water flow (current).](assets/images/ElectricityPrimer_WaterAnalogy_SquierGeorgetown.png)
-**Figure.** Continuing our water analogies: imagine two pipes filled with resistive materials, one with gravel (less resistance) and one filled with clay (more resistance). Both pipes have an equal amount of water pressure (voltage) "pushing" water through them. The pipe with less resistance (gravel) will have more water flow (current). Image from Professor Richard Squier's [Electricity Primer](http://people.cs.georgetown.edu/~squier/Teaching/ComputerSystemsArchitecture/520-2013-CourseDocuments/Lec-1-electricityPrimer.pdf).
+**Gambar.** Melanjutkan analogi air kita: bayangkan dua pipa yang diisi dengan material resistif, satu berisi kerikil (hambatan lebih rendah) dan satu lagi diisi tanah liat (hambatan lebih tinggi). Kedua pipa memiliki jumlah tekanan air (tegangan) yang sama yang "mendorong" air melalui pipa-pipa tersebut. Pipa dengan hambatan lebih rendah (kerikil) akan memiliki aliran air (arus) yang lebih banyak. Gambar dari *Electricity Primer* milik Profesor Richard Squier.
 {: .fs-1 }
 
 {: .note}
-For metal wires, **resistance** **increases** as **temperature** **increases**. Why? When a metal heats up, its atoms vibrate more vigorously. This increased vibration causes more collisions with the flowing electrons, which impedes their movement and *increases* the electrical resistance.
+Untuk kawat logam, **hambatan** akan **meningkat** seiring **suhu** yang **meningkat**. Mengapa? Ketika logam memanas, atom-atomnya bergetar dengan lebih kuat. Peningkatan getaran ini menyebabkan lebih banyak tabrakan dengan elektron yang mengalir, yang menghalangi pergerakan mereka dan *meningkatkan* hambatan listriknya.
 
-### Electrical resistivity
+### Resistivitas listrik
 
-Because resistance is not just an intrinsic property of a material (*e.g.,* based on its atomic makeup) but also based on the material's shape and size, we use [*electrical resistivity*](https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity) $$\rho$$, which is independent of a material's dimensions (assuming temperature is constant).
+Karena hambatan bukan sekadar sifat intrinsik dari suatu material (misalnya berdasarkan struktur atomnya) tetapi juga didasarkan pada bentuk dan ukuran material tersebut, kita menggunakan istilah [*resistivitas listrik*](https://id.wikipedia.org/wiki/Resistivitas_listrik) $$\rho$$, yang nilainya tidak bergantung pada dimensi material (dengan asumsi suhu konstan).
 
-More specifically, at a constant temperature, the electrical resistivity $$\rho$$ of a wire can be calculated by:
+Lebih spesifiknya, pada suhu konstan, resistivitas listrik $$\rho$$ dari sebuah kabel dapat dihitung dengan rumus:
 
 $$\rho =R{\frac {A}{\ell }}$$,
 
-where $$R$$ is the electrical resistance of a uniform specimen of the material, $$ℓ$$ is the length of the specimen, and $$A$$ is the cross-sectional area of the specimen. The SI unit for resistivity are ohm-meters (Ωm).
+di mana $$R$$ adalah hambatan listrik dari spesimen material yang seragam, $$ℓ$$ adalah panjang spesimen, dan $$A$$ adalah luas penampang melintang spesimen. Satuan SI untuk resistivitas adalah ohm-meter (Ωm).
 
-Similar to resistance and conductance, we can also describe *resistivity* in terms of its inverse, which is *conductivity* $$\sigma$$:
+Serupa dengan hambatan dan konduktansi, kita juga dapat mendeskripsikan *resistivitas* dalam bentuk kebalikannya, yaitu *konduktivitas* $$\sigma$$:
 
 $$\sigma = \frac {1}{\rho }$$
 
-The SI units of conductivity are in siemens per meter (S/m).
+Satuan SI untuk konduktivitas adalah siemens per meter (S/m).
 
-[Scherz and Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) report some common resistivities (and conductivities) of materials, which is drawn from the *Handbook of Chemistry and Physics*.
+[Scherz dan Monk](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml) melaporkan beberapa nilai resistivitas (dan konduktivitas) material yang umum, yang diambil dari *Handbook of Chemistry and Physics*.
 
-| Material  | Classification | Resistivity $$\rho$$ (Ωm) | Conductivity $$\sigma$$ (S/m) |
-|-----------|----------------|--------------------------|-------------------------------|
-|Aluminum   | Conductor      | $$2.82 × 10^{-8}$$       | $$3.55 × 10^{7}$$            |
-|Gold       | Conductor      | $$2.44 × 10^{-8}$$       | $$4.10 × 10^{7}$$            |
-|Silver     | Conductor      | $$1.59 × 10^{-8}$$       | $$6.29 × 10^{7}$$            |
-|Copper     | Conductor      | $$1.72 × 10^{-8}$$       | $$5.81 × 10^{7}$$            |
-|Brass      | Conductor      | $$7 × 10^{-8}$$          | $$1.4 × 10^{7}$$             |
-|Carbon     | Semi-Conductor | $$3.5 × 10^{-5}$$        | $$2.9 × 10^{4}$$             |
-|Silicon    | Semi-Conductor | $$640$$                   | $$3.5 × 10^{-3}$$            |
-|Glass      | Insulator      | $$\sim10^{10}$$           | $$10^{-10}$$                  |
-|Rubber     | Insulator      | $$10^{9}$$                | $$10^{-9}$$                   |
-|Teflon     | Insulator      | $$10^{14}$$               | $$10^{-14}$$ 
+| Material   | Klasifikasi    | Resistivitas $$\rho$$ (Ωm) | Konduktivitas $$\sigma$$ (S/m) |
+|------------|----------------|--------------------------|-------------------------------|
+|Aluminium   | Konductor      | $$2.82 × 10^{-8}$$       | $$3.55 × 10^{7}$$             |
+|Emas        | Konductor      | $$2.44 × 10^{-8}$$       | $$4.10 × 10^{7}$$             |
+|Perak       | Konductor      | $$1.59 × 10^{-8}$$       | $$6.29 × 10^{7}$$             |
+|Tembaga     | Konductor      | $$1.72 × 10^{-8}$$       | $$5.81 × 10^{7}$$             |
+|Kuningan    | Konductor      | $$7 × 10^{-8}$$          | $$1.4 × 10^{7}$$              |
+|Karbon      | Semi-Konduktor | $$3.5 × 10^{-5}$$        | $$2.9 × 10^{4}$$              |
+|Silikon     | Semi-Konduktor | $$640$$                  | $$3.5 × 10^{-3}$$             |
+|Kaca        | Isolator       | $$\sim10^{10}$$          | $$10^{-10}$$                  |
+|Karet       | Isolator       | $$10^{9}$$               | $$10^{-9}$$                   |
+|Teflon      | Isolator       | $$10^{14}$$              | $$10^{-14}$$                  |
 
 <!-- See also http://spiff.rit.edu/classes/phys213/lectures/resist/resist_long.html -->
 
-### Increasing conductance by increasing wire girth
+### Meningkatkan konduktansi dengan memperbesar ketebalan kabel
 
-As noted above, we can *increase* the conductance of a wire by *increasing* its diameter (a "bigger pipe" for current to flow). Drawing again on our water analogy: just as a larger diameter pipe can support larger quantities of water flow so too can a thicker wire support more current flow.
+Seperti yang telah disebutkan di atas, kita dapat *meningkatkan* konduktansi sebuah kabel dengan cara *memperbesar* diameternya (seperti membuat "pipa yang lebih besar" untuk aliran arus). Merujuk kembali ke analogi air kita: sama seperti pipa berdiameter lebih besar dapat menampung jumlah aliran air yang lebih besar, kabel yang lebih tebal juga dapat menampung aliran arus yang lebih besar.
 
 <!-- TODO: possibly insert figure (maybe from that PDF?) -->
 
-Because wire diameter is so important to current capacity, there is a standardized system for measurement. In the US, we use the [American Wire Gauge](https://en.wikipedia.org/wiki/American_wire_gauge) or AWG system. A wire with a diameter of 5.2mm (AWG 4) has a current capacity of 59.6A. In comparison, a standard circuit prototyping wire (0.64mm or AWG 22)—see Figure below—has a current capacity of 0.9A.
+Karena diameter kabel sangat penting untuk kapasitas arus, terdapat sistem pengukuran yang terstandardisasi. Di AS, sistem yang digunakan adalah [American Wire Gauge](https://en.wikipedia.org/wiki/American_wire_gauge) atau sistem AWG. Kabel dengan diameter 5.2mm (AWG 4) memiliki kapasitas arus sebesar 59.6A. Sebagai perbandingan, kabel prototipe rangkaian standar (0.64mm atau AWG 22)—lihat Gambar di bawah—memiliki kapasitas arus sebesar 0.9A.
 
 ![A picture of a box of AWG circuit prototyping wire and a complementary image showing that wire being used in a breadboard](assets/images/StandardSolidCorePrototypingWireOf22AWG.png)
-**Figure.** Example AWG solid-core wire commonly used in circuit prototyping. The box of wire on the left is $29.95 for ten 25ft spools from [Adafruit](https://www.adafruit.com/product/3174).
+**Gambar.** Contoh kabel inti padat (*solid-core*) AWG yang umum digunakan dalam pembuatan prototipe rangkaian. Kotak kabel di sebelah kiri seharga $29,95 untuk sepuluh gulungan masing-masing sepanjang 25 kaki dari [Adafruit](https://www.adafruit.com/product/3174).
 {: .fs-1 }
 
-Counterintuitively, *increasing* AWG numbers denote *decreasing* wire diameters (and strangely, AWG gauges are always integers but can be less than 1 with '0', '00', or even '000' for a very thick wire).
+Secara berlawanan dengan intuisi, angka AWG yang *semakin besar* menunjukkan diameter kabel yang *semakin kecil* (dan anehnya, ukuran AWG selalu berupa bilangan bulat tetapi bisa kurang dari 1 dengan simbol '0', '00', atau bahkan '000' untuk kabel yang sangat tebal).
 
-If we pass more current through a wire than its capacity, it will start to heat up and eventually burn. Indeed, this is how fuses are *designed* to work! Fuses contain thin wires that protect your circuit from damagingly high current and "burn up" to instantly disconnect your circuit (creating an "open circuit") if a high current is applied. You can then replace the fuse, which is far cheaper and easier than replacing your electrical device or appliance. There are lots of great videos of this online, including [here](https://youtu.be/V-lhVTDWjwY?t=120) and [here](https://youtu.be/qgz1lskyYDU?t=70).
+Jika kita mengalirkan arus melebihi kapasitas kabel tersebut, kabel akan mulai memanas dan pada akhirnya terbakar. Sungguh, ini adalah prinsip bagaimana sekering (*fuse*) *dirancang* untuk bekerja! Sekering berisi kabel tipis yang melindungi rangkaian Anda dari arus tinggi yang merusak dan akan "terbakar habis" untuk langsung memutuskan rangkaian Anda (menciptakan "rangkaian terbuka") jika arus yang tinggi dialirkan. Anda kemudian dapat mengganti sekering tersebut, yang mana jauh lebih murah dan mudah daripada mengganti perangkat elektronik atau peralatan rumah tangga Anda. Ada banyak video bagus tentang hal ini di internet, termasuk [di sini](https://youtu.be/V-lhVTDWjwY?t=120) dan [di sini](https://youtu.be/qgz1lskyYDU?t=70).
 
 <video autoplay loop muted playsinline aria-label="Slow-motion video of automotive fuses burning out when excessive current is applied, demonstrating how fuses protect circuits by breaking the connection.">
   <source src="assets/videos/BlowingFuses_RobinsonsAuto.mp4" type="video/mp4" />
 </video>
-**Figure.** If we attempt to push large amounts of current through a wire and exceed its carrying capacity (by hooking up a large voltage supply, for example), then the wire will heat up and could start a fire. This can happen almost instantly, which is the operating principle behind a fuse (shown above). A fuse is *designed* to burn up thereby disconnecting your circuit when a damagingly large current is supplied. Video from [Robinson Auto](https://youtu.be/V-lhVTDWjwY).
+**Gambar.** Jika kita mencoba mendorong arus dalam jumlah besar melalui kabel dan melebihi kapasitas daya tampungnya (dengan menghubungkan pasokan tegangan yang besar, misalnya), maka kabel tersebut akan memanas dan dapat memicu kebakaran. Hal ini dapat terjadi hampir seketika, yang merupakan prinsip kerja di balik sebuah sekering (ditunjukkan di atas). Sekering *dirancang* untuk terbakar sehingga memutuskan rangkaian Anda ketika arus yang sangat besar dan merusak dialirkan. Video dari [Robinson Auto](https://youtu.be/V-lhVTDWjwY).
 {: .fs-1 }
 
 <!-- TODO: can we totally ignore wire resistance? It depends. Typically, in basic circuit analysis, we do but this can become problematic if we employ the wrong wire sizes in practice. Nice discussion of cars, 12V batteries, and thick wiring here: https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html -->
@@ -397,73 +398,70 @@ TODO?
 
 Could have posille's law here? -->
 
-### What are resistors?
+### Apa itu resistor?
 
 <video autoplay loop muted playsinline aria-label="An animated gif showing how resistors can be placed in a circuit to resist current flow.">
   <source src="assets/videos/ResistorCurrentFlow_EngineeringMindset-Optimized.mp4" type="video/mp4" />
 </video>
-**Figure.** This animation shows how a resistor can be placed between two wires to reduce current flow. Notice how electrons flow freely through the copper wire. With the resistor, these electrons "collide" with other atoms and themselves, which restricts electron flow (and also transforms some energy as heat). Animation from [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
+**Gambar.** Animasi ini menunjukkan bagaimana sebuah resistor dapat ditempatkan di antara dua kabel untuk mengurangi aliran arus. Perhatikan bagaimana elektron mengalir bebas melalui kabel tembaga. Begitu melewati resistor, elektron-elektron ini "bertabrakan" dengan atom lain dan sesamanya, yang membatasi aliran elektron (dan juga mengubah sebagian energi menjadi panas). Animasi dari [The Engineering Mindset](https://youtu.be/kcL2_D33k3o?t=891).
 {: .fs-1 }
 
-Resistors are specially formulated electrical components that restrict current at a certain rate based on their material composition and construction. In circuits, we place resistors between components to lower current. Why would we want to restrict current? In short, to protect components in our circuit that require lower current (like LEDs).
+Resistor adalah komponen listrik yang diformulasikan secara khusus untuk membatasi arus pada laju tertentu berdasarkan komposisi material dan konstruksinya. Dalam rangkaian listrik, kita menempatkan resistor di antara komponen untuk menurunkan arus. Mengapa kita ingin membatasi arus? Singkatnya, untuk melindungi komponen dalam rangkaian kita yang membutuhkan arus lebih rendah (seperti LED).
 
-Just as there is a pressure drop after a kink in a hose, so too is there a voltage drop after a resistor. That is, electric charges before a resistor have a higher electric potential than those after.
+Sama seperti adanya penurunan tekanan setelah selang yang tertekuk, begitu pula terdapat penurunan tegangan setelah melewati resistor. Artinya, muatan listrik sebelum resistor memiliki potensial listrik yang lebih tinggi daripada setelah melewati resistor.
 
 {: .note }
-We will dive deeper into resistors in [Lesson 5: Using Resistors](resistors.md), where you'll learn how they're made, how to read their color bands, and how to calculate their power dissipation.
+Kita akan membahas resistor lebih mendalam pada [Pembelajaran 5: Menggunakan Resistor](resistors.md), di mana Anda akan mempelajari bagaimana komponen ini dibuat, cara membaca gelang warnanya, dan cara menghitung disipasi dayanya.
 
 <!-- **TODO: We'll talk more about this in Lesson X.** -->
 
-## Some common questions
+## Beberapa pertanyaan umum
 
-Before moving on to the next lesson, let's cover some common questions.
+Sebelum melanjutkan ke pembelajaran berikutnya, mari kita bahas beberapa pertanyaan yang sering diajukan.
 
-### What's a short circuit?
+### Apa itu hubungan singkat (korsleting)?
 
 <video autoplay loop muted playsinline aria-label="Animation of a short circuit in a simulation environment, showing a wire bypassing a light bulb and creating a zero-resistance path that causes excessive current.">
   <source src="assets/videos/ShortCircuitExample_PhetScreenRecording-Cropped2_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** A **short circuit** is when there is a zero-resistance path back to your power source. It's never good! Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
-{: .fs-1 }
+**Gambar.** Sebuah **hubungan singkat** (*short circuit* / korsleting) terjadi ketika ada jalur berhambatan nol yang langsung kembali ke sumber daya Anda (*shortcut*). Hal ini tidak pernah berdampak baik! Korsleting dapat menyebabkan arus berlebih, membakar komponen, memicu kebakaran, atau bahkan menyebabkan ledakan. Berikut adalah [video](https://youtu.be/4fj5BLo27yw?si=UWbAml8UFQ_Gx4oy) dari empat baterai AA yang mengalami korsleting, sebuah [berita](https://youtu.be/75_f6CjIcz8) tentang bagaimana kebakaran rumah bermula ketika dua baterai 9V saling korsleting, dan sebuah [kiriman Stack Exchange](https://physics.stackexchange.com/a/30596) tentang korsleting pada satu baterai alkaline AA.
 
-A **short circuit** is a zero-resistance *shortcut* between two sides of a power source—for example, if the positive and negative terminals of a battery directly touch. It's a bad thing and should be avoided. Short circuits can cause excessive current, burn out components, start fires, or even cause explosions. Here's a [video](https://youtu.be/4fj5BLo27yw?si=UWbAml8UFQ_Gx4oy) of four AA batteries being shorted, a [news story](https://youtu.be/75_f6CjIcz8) about how a house fire started when two 9V batteries shorted together, and a [Stack Exchange post](https://physics.stackexchange.com/a/30596) about shorting a single AA alkaline battery.
+Ketika kita membangun rangkaian, kita jelas tidak mencoba membuat *korsleting*, tetapi hal itu bisa saja terjadi secara tidak sengaja. Sebagai contoh, kita mungkin secara tidak sengaja menghubungkan sumber 5V langsung ke ground, menempelkan dua kabel secara tidak sengaja, atau bahkan membuat koneksi yang tidak disengaja antara dua titik dalam rangkaian menggunakan obeng atau perkakas logam lainnya. Saat bekerja pada rangkaian Anda, selalu pastikan bahwa rangkaian tersebut dalam keadaan *tidak beraliran listrik* (mati) untuk mencegah korsleting yang tidak disengaja selama perakitan.
 
-When we build circuits, we obviously do not try to create *shorts* but they can, accidentally, happen. For example, we may inadvertently hook up a 5V source to ground, touch two wires together, or even make accidental connections between two points in a circuit with a screwdriver or other metal tool. When working on your circuit, always make sure that it is *unpowered* to prevent accidental shorts while building.
+Bagaimana Anda tahu jika ada sesuatu yang korsleting? Anda mungkin mulai mencium bau sesuatu yang terbakar atau menyentuh kabel atau komponen listrik lain yang terasa sangat panas. Jika hal ini terjadi—dan ini pada akhirnya pernah dialami oleh kita semua—segera cabut sumber daya Anda!
 
-How will you know if something is shorted? You might start to smell something burning or touch a wire or other electrical component that is hot. If this happens—and it eventually happens to all of us—immediately unplug your power source!
+Perlu dicatat bahwa port USB Anda dan mikrokontroler Arduino memiliki tingkat perlindungan korsleting tertentu. Misalnya, jika Anda mulai menarik terlalu banyak arus dari USB Anda, port tersebut akan (diharapkan) otomatis terputus. Dan rumah Anda, tentu saja, memiliki "sakelar pemutus arus" (*circuit breaker* / MCB) bawaan yang terpicu secara otomatis ketika arus berlebih ditarik (seperti yang terjadi saat korsleting). Lihat bagaimana cara kerja pemutus arus dalam gerak lambat [di sini](https://youtu.be/wGFnooeA6Iw?t=116) dan [di sini](https://youtu.be/wGFnooeA6Iw?t=284).
 
-Note that your USB port and the Arduino microcontrollers have some level of short circuit protection. For example, if you start drawing too much current from your USB, it will (hopefully) auto-disconnect. And your homes, of course, have built-in "circuit breakers" that trigger automatically when excess current is drawn (like happens with a short). See how a circuit breaker works in slow motion [here](https://youtu.be/wGFnooeA6Iw?t=116) and [here](https://youtu.be/wGFnooeA6Iw?t=284).
+Ketika sakelar pemutus arus terpicu, ia akan menciptakan *rangkaian terbuka*, yang akan kita jelaskan selanjutnya!
 
-When a circuit breaker triggers, it creates an *open circuit*, which we describe next!
+### Apa itu rangkaian terbuka?
 
-### What is an open circuit?
-
-While a **closed** circuit is a complete circuit (a "circle" for current flow), an **open** circuit is an *incomplete* circuit. For example, when there is no path from the positive terminal of a battery to the negative. This might happen intentionally (*e.g.,* due to a switch opening) or unintentionally (*e.g.,* circuit shuts off due to a fuse blowing).
+Sementara rangkaian **tertutup** (*closed circuit*) adalah rangkaian yang lengkap (sebuah "lingkaran" penuh untuk aliran arus), rangkaian **terbuka** (*open circuit*) adalah rangkaian yang *tidak lengkap*. Sebagai contoh, ketika tidak ada jalur dari terminal positif baterai menuju ke terminal negatif. Hal ini bisa terjadi secara sengaja (misalnya karena sakelar yang dibuka) atau tidak sengaja (misalnya rangkaian mati karena sekering yang putus).
 
 <video autoplay loop muted playsinline aria-label="Animation toggling between a closed circuit with current flowing and an open circuit where the wire is disconnected and no current flows.">
   <source src="assets/videos/ClosedVsOpenCircuit-Cropped_PhetRecording_ByJonFroehlich.mp4" type="video/mp4" />
 </video>
-**Figure.** An **open circuit** is when **no path** exists between the positive and negative terminals of your power source. It is an incomplete circuit. Animation made in the [Phet Simulation Environment](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
+**Gambar.** Sebuah **rangkaian terbuka** adalah kondisi ketika **tidak ada jalur** yang menghubungkan antara terminal positif dan negatif dari sumber daya Anda. Rangkaian ini merupakan rangkaian yang tidak lengkap. Animasi dibuat dalam [Lingkungan Simulasi PhET](https://phet.colorado.edu/sims/html/circuit-construction-kit-dc-virtual-lab/latest/circuit-construction-kit-dc-virtual-lab_en.html).
 {: .fs-1 }
 
-### What's the difference between AC and DC?
+### Apa perbedaan antara AC dan DC?
 
-Digital circuits use **Direct Current** (**DC**), where current flows in only one direction—this is exactly what batteries produce. In contrast, your wall outlet provides **Alternating Current** (**AC**), where the current periodically reverses direction, typically oscillating as a sine wave. AC is used for the power grid because it is much more efficient to transmit over long distances, as the voltage can be easily stepped up or down using transformers.
+Rangkaian digital menggunakan **Direct Current** (**DC** atau Arus Searah), di mana arus hanya mengalir ke satu arah—ini persis seperti apa yang dihasilkan oleh baterai. Sebaliknya, stopkontak dinding Anda menyediakan **Alternating Current** (**AC** atau Arus Bolak-balik), di mana arus listrik secara berkala berbalik arah, biasanya berosilasi membentuk gelombang sinus. AC digunakan untuk jaringan listrik karena jauh lebih efisien untuk ditransmisikan dalam jarak jauh, karena tegangannya dapat dengan mudah dinaikkan atau diturunkan menggunakan transformator (trafo).
 
-However, microcontrollers and digital logic rely on stable voltage thresholds to reliably read binary 1s and 0s. Because of this, almost all electronic devices—including your phone, laptop, and Arduino—internally require DC. The "AC adapter" or "power brick" that comes with your electronics handles the heavy lifting of converting the AC from the wall into the smooth, steady DC voltage your circuits need.
+Namun, mikrokontroler dan logika digital bergantung pada ambang batas tegangan yang stabil untuk dapat membaca biner 1 dan 0 secara andal. Karena alasan ini, hampir semua perangkat elektronik—termasuk ponsel, laptop, dan Arduino Anda—secara internal membutuhkan arus DC. "Adaptor AC" atau "kepala pengisi daya" (*power brick*) yang disertakan dengan perangkat elektronik Anda bertugas melakukan tugas berat untuk mengubah arus AC dari dinding menjadi tegangan DC yang mulus dan stabil yang dibutuhkan oleh rangkaian Anda.
 
-There are lots of great videos on YouTube explaining the difference between AC and DC, like [this one](https://youtu.be/vN9aR2wKv0U) by AddOhms and [this one](https://youtu.be/Wm75XgbqHBY) by KEMET Electronics.
+Ada banyak video bagus di YouTube yang menjelaskan perbedaan antara AC dan DC, seperti [yang satu ini](https://youtu.be/vN9aR2wKv0U) oleh AddOhms dan [yang ini](https://youtu.be/Wm75XgbqHBY) oleh KEMET Electronics.
 
-## Activity
+## Aktivitas
 
 {: .note }
-> **Learning objective.** By the end of this activity, you should be able to identify the input and output voltage and current ratings on common AC-to-DC adapters, and appreciate the range of voltages and currents used by everyday electronic devices.
+> **Tujuan pembelajaran.** Di akhir aktivitas ini, Anda harus mampu mengidentifikasi peringkat tegangan dan arus input serta output pada adaptor AC-to-DC yang umum, serta menghargai rentang tegangan dan arus yang digunakan oleh perangkat elektronik sehari-hari.
 
-To gain a better understanding of common operating voltages/currents, we would like you to document the AC input voltages/current and the DC output voltages/current of devices in your home. Select five devices and take a picture of the device and its AC-to-DC adapter with the operating AC/DC information visible (if you can't find this sticker, it may be on the device itself, which is also fine). In your prototyping journals, include these pictures along with a table of operating input/output voltages/current and a brief summary of what you found.
+Untuk mendapatkan pemahaman yang lebih baik tentang tegangan/arus operasional yang umum, kami ingin Anda mendokumentasikan tegangan/arus input AC dan tegangan/arus output DC dari perangkat-perangkat yang ada di rumah Anda. Pilih lima perangkat dan ambil foto dari perangkat beserta adaptor AC-to-DC miliknya dengan informasi operasional AC/DC yang terlihat jelas (jika Anda tidak dapat menemukan stiker ini, informasi tersebut mungkin tertera pada perangkat itu sendiri, yang juga tidak masalah). Di dalam jurnal prototipe Anda, sertakan foto-foto ini beserta tabel tegangan/arus input/output operasional dan ringkasan singkat dari apa yang Anda temukan.
 
 ![Three AC-to-DC power adapters showing their input voltage and current ratings on the label, along with the DC output voltage and current specifications.](assets/images/InputOutputVoltages_ThreeDevices_ByJonFroehlich.png)
 
-**Figure.** Here's an example of the AC input and DC output of three devices in my home.
+**Gambar.** Berikut adalah contoh input AC dan output DC dari tiga perangkat di rumah saya.
 {: .fs-1 }
 
 <!-- Should probably talk about watts P= V * I. But don't want to overwhelm in first lesson. https://learning.oreilly.com/library/view/make-electronics-2nd/9781680450255/ch01.html has a nice introductory description of watts -->
@@ -474,16 +472,16 @@ To gain a better understanding of common operating voltages/currents, we would l
 - Introduce the multimeter and how to measure voltage, current, and resistance
 - Engineering Mindset has a good animation of [ammeter here](https://youtu.be/kcL2_D33k3o?t=718) -->
 
-## Resources
+## Sumber Daya
 
-### Circuit Simulators
+### Simulator Rangkaian
 
-We recommend the following basic circuit simulators (these are not intended for advanced analysis):
-- [Falstad's CircuitJS](https://www.falstad.com/circuit/circuitjs.html). A completely free, open-source web platform for circuit simulation with circuit animation.
-- [EveryCircuit.com](https://everycircuit.com/). Similar to CircuitJS in supporting simulated animations of current but more powerful (and also not free, though there is a free trial). There is no 'wire' component; you need to click one node and then another node to make a connection.
-- [Circuitlab.com](https://www.circuitlab.com/). A more traditional circuit simulator that is not as approachable for novices/makers. You can use a trial version but the number of circuits you can create is limited without a paid account.
+Kami merekomendasikan simulator rangkaian dasar berikut (ini tidak ditujukan untuk analisis tingkat lanjut):
+- [Falstad's CircuitJS](https://www.falstad.com/circuit/circuitjs.html). Sebuah platform web yang sepenuhnya gratis dan open-source untuk simulasi rangkaian yang dilengkapi dengan animasi rangkaian.
+- [EveryCircuit.com](https://everycircuit.com/). Mirip dengan CircuitJS dalam mendukung simulasi animasi arus tetapi lebih kuat (dan juga tidak gratis, meskipun ada masa uji coba gratis). Tidak ada komponen 'kabel'; Anda perlu mengklik satu node lalu node lainnya untuk membuat koneksi.
+- [Circuitlab.com](https://www.circuitlab.com/). Simulator rangkaian yang lebih tradisional yang kurang ramah untuk pemula/maker. Anda dapat menggunakan versi uji coba tetapi jumlah rangkaian yang dapat Anda buat terbatas tanpa akun berbayar.
 
-### Online text links
+### Tautan teks online
 
 - [Chapter 2: Circuit Theory](https://learning.oreilly.com/library/view/practical-electronics-for/9781259587559/xhtml/13_Chapter_02.xhtml), Scherz & Monk, Practical Electronics for Inventors, 4th Edition
 - [Basic electrical quantities: current, voltage, power](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-voltage-and-current)
@@ -494,7 +492,7 @@ We recommend the following basic circuit simulators (these are not intended for 
 <!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential -->
 <!-- https://www.physicsclassroom.com/class/circuits/Lesson-1/Electric-Potential-Difference -->
 
-### Video links
+### Tautan video
 
 - [Intro to potential differences and voltage](https://youtu.be/pmtmJep1xY0), [Khan Academy](https://www.khanacademy.org/science/in-in-class10th-physics/in-in-electricity/in-in-electric-potential-potential-difference/v/intro-to-potential-difference-voltage)
 - [Electronics for Beginners](https://www.youtube.com/watch?v=8gvJzrjwjds&list=PLzqS33DOPhJkRn6e9_OTdQwRojO8qlusI), [afrotechmods.com](http://afrotechmods.com/tutorials/)
@@ -507,9 +505,9 @@ We recommend the following basic circuit simulators (these are not intended for 
 <!-- 
 MIT 8.02x lecture on electric charges, forces, and coulomb's law (polarization) by Walter Lewin: https://youtu.be/x1-SibwIPM4 -->
 
-## Next Lesson
+## Pembelajaran Berikutnya
 
-In the [next lesson](schematics.md), we will learn about visual representations of circuits—called [circuit schematics](schematics.md), which will prepare us for some basic circuit analysis and [Ohm's Law](ohms-law.md).
+Pada [pembelajaran berikutnya](schematics.md), kita akan mempelajari tentang representasi visual dari rangkaian—yang disebut [skema rangkaian](schematics.md), yang akan mempersiapkan kita untuk beberapa analisis rangkaian dasar dan [Hukum Ohm](ohms-law.md).
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="schematics.html" class="nav-next">

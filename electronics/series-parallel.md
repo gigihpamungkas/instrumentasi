@@ -1,7 +1,7 @@
 ---
 layout: default
-title: L4&#58; Resistor Seri dan Paralel
-description: "Kembangkan Hukum Ohm ke rangkaian resistor seri dan paralel: resistor seri membagi tegangan, resistor paralel membagi arus, lengkap dengan rumus hambatan pengganti dan CircuitJS."
+title: L4&#58; Series and Parallel Resistors
+description: "Extend Ohm's Law to series and parallel resistor circuits: series resistors divide voltage, parallel resistors divide current, with equivalent-resistance formulas and CircuitJS."
 image: /electronics/assets/images/OhmsLaw_IntroToSeriesVsParallelResistorCircuits_ByJonFroehlich.png
 nav_order: 4
 parent: Intro to Electronics
@@ -13,236 +13,236 @@ usetocbot: true
 # {{ page.title | replace_first:'L','Lesson '}}
 {: .no_toc }
 
-## Daftar Isi
+## Table of Contents
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 ---
 
-Dalam pelajaran Hukum Ohm, kita telah menganalisis rangkaian yang relatif sederhana dengan satu resistor. Rangkaian tersebut membantu kita membangun fondasi dan pemahaman konseptual tentang Hukum Ohm serta cara menerapkannya; namun, sebagian besar rangkaian tidak sesederhana itu.
+In our Ohm's Law lesson we analyzed relatively straightforward circuits with a single resistor. These circuits helped us build a foundation for and a conceptual understanding of Ohm's Law and how to apply it; however, most circuits are not so simple.
 
-Dalam pelajaran ini, kita akan mengembangkan Hukum Ohm ke rangkaian yang lebih rumit: resistor dalam hubungan **seri** dan resistor dalam hubungan **paralel**. Singkatnya:
-* Resistor seri **membagi tegangan** dan merupakan salah satu konfigurasi rangkaian yang paling umum (dan berguna) saat bekerja dengan mikrokontroler dan sensor resistif seperti [potensiometer](../arduino/potentiometers.md), [resistor sensor tekanan (FSR)](../arduino/force-sensitive-resistors.md), dan [fotocell/LDR](../sensors/photoresistors.md).
-* Resistor paralel **membagi arus** (dan arus yang lebih besar akan mengalir melalui jalur dengan hambatan yang lebih kecil). Rangkaian paralel berguna, misalnya, untuk memberi daya pada beberapa LED sekaligus.
+In this lesson, we're going to extend Ohm's Law to more complicated circuits: resistors in **series** and resistors in **parallel**. In short:
+* Resistors in series **divide voltage** and are one of the most common (and useful) circuit configurations when working with microcontrollers and resistive sensors like [potentiometers](../arduino/potentiometers.md), [force-sensitive resistors](../arduino/force-sensitive-resistors.md), and [photocells](../sensors/photoresistors.md).
+* Resistors in parallel **divide current** (and more current travels down paths with less resistance). Parallel circuits are useful, for example, in powering multiple LEDs.
 
 ![Two circuit diagrams side by side: on the left, a series resistor circuit with R1 and R2 connected end-to-end in a single loop with a battery; on the right, a parallel resistor circuit with R1 and R2 on separate branches sharing the same two nodes.](assets/images/OhmsLaw_IntroToSeriesVsParallelResistorCircuits_ByJonFroehlich.png)
-**Gambar.** Contoh resistor **seri** (kiri) dan resistor **paralel** (kanan). Gambar dibuat di PowerPoint.
+**Figure.** An example of **series** resistors (left) and **parallel** resistors (right). Images made in PowerPoint.
 {: .fs-1 }
 
-## Hambatan pengganti
+## Equivalent resistances
 
-Menggunakan [Hukum rangkaian Kirchhoff](https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws), kita dapat menurunkan nilai hambatan "pengganti" (ekuivalen) untuk rangkaian seri dan paralel.
+Using [Kirchhoff's circuit laws](https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws), we can derive "equivalent" resistances for series and parallel circuits.
 
-Untuk resistor seri, kita menjumlahkan nilai hambatan untuk menemukan total hambatan $$R_{equivalent}$$:
+For series resistors, we sum resistances to find the aggregate resistance $$R_{equivalent}$$:
 
 $$R_{equivalent} = R_{1} + R_{2} + ... + R_{N-1} + R_{N}$$
 
-Untuk resistor paralel, rumusnya sedikit lebih rumit:
+For parallel resistors, it's a bit more complicated:
 
 $$R_{equivalent} = \frac{1}{\frac{1}{R_{1}} + \frac{1}{R_{2}} + ... + \frac{1}{R_{N-1}} + \frac{1}{R_{N}}}$$
 
-Ya, persamaan hambatan paralel ini memang terlihat agak misterius, tetapi Anda dapat menurunkannya sendiri (atau bahkan melupakannya sama sekali) jika Anda memahami Hukum Ohm dan [Hukum Kirchhoff](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/v/ee-kirchhoffs-current-law).
+Yes, the parallel resistance equation is a bit enigmatic but you can derive it yourself (or even forget it altogether) if you know Ohm's Law and [Kirchhoff's Laws](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/v/ee-kirchhoffs-current-law).
 
-Bagi kita, konsep paling penting dan berguna untuk dipahami adalah bahwa **resistor seri** membagi tegangan (kita akan menggunakan ini nanti pada rangkaian mikrokontroler kita) dan bahwa **resistor paralel** membagi arus (dengan arus yang *lebih besar* mengalir melalui cabang yang memiliki hambatan lebih kecil). Gambar di bawah ini mencoba menjelaskan hal tersebut secara ringkas.
+For us, the most important and useful concept to understand is that **series resistors** divide voltage (we'll use this later in our microcontroller circuits) and that **parallel resistors** divide current (with *more* current flowing through branches with less resistance). The image below attempts to concisely explain this.
 
 ![A detailed comparison of series and parallel resistor circuits. The series circuit (left) shows that current is the same through each resistor but voltage is divided proportionally across them. The parallel circuit (right) shows that voltage is the same across each branch but current is divided, with more current flowing through the branch with lower resistance.](assets/images/OhmsLaw_IntroToSeriesVsParallelResistorCircuits_PictorialDiagram_ByJonFroehlich.png)
 
-**Gambar.** Gambaran umum tentang cara kerja **resistor seri** (arus sama di setiap resistor tetapi *tegangan dibagi*) dan cara kerja **resistor paralel** (tegangan sama di setiap resistor tetapi *arus dibagi*). Luangkan waktu sejenak untuk mempelajari dan memahami mengapa hal ini bisa terjadi. Klik kanan pada gambar dan pilih 'Buka di tab baru' untuk memperbesar. Gambar dibuat di PowerPoint.
+**Figure.** An overview of how **series resistors** work (current is the same through each resistor but *voltage is divided*) and how **parallel resistors** work (voltage is the same across each resistor but *current is divided*). Take a moment to study and understand why this might be. Right-click on the image and select 'Open in new tab' to enlarge. Image made in PowerPoint.
 {: .fs-1 }
 
-Dan, meskipun kemampuan untuk memahami dan menganalisis rangkaian secara manual itu penting dalam physical computing, jika Anda bingung, Anda selalu bisa menggunakan simulator rangkaian seperti [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
+And, while the ability to manually understand and analyze a circuit is important in physical computing, if you become confused, you can always use a circuit simulator like [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
-## Resistor seri
+## Series resistors
 
-[Resistor dalam hubungan seri](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-series-resistors) terhubung secara berurutan: ujung ketemu pangkal.
+[Resistors in series](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-series-resistors) are connected in sequence: head-to-tail.
 
 ![Two diagrams showing components in series: on the left, a generic representation of three components connected end-to-end in a single path; on the right, a circuit schematic with resistors arranged head-to-tail between a voltage source.](assets/images/ComponentsInSeries_KhanAcademyAndJonFroehlich.png)
 
-**Gambar.** Komponen dikatakan seri jika mereka digabungkan ujung-ke-ujung (atau kepala-ke-ekor) secara berurutan seperti di atas. Gambar di sebelah kiri dari [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-series-resistors). Gambar dibuat di PowerPoint.
+**Figure.** Components are in series if they are joined end-to-end (or head-to-tail) in sequence like the above. Image on left from [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-series-resistors). Image made in PowerPoint.
 {: .fs-1 }
 
-Dari Hukum Ohm, kita tahu bahwa resistor mengakibatkan *penurunan* tegangan (memang, penurunan tegangan $$V_{R}$$ pada sebuah resistor $$R$$ adalah $$V_{R} = I * R$$). Dengan demikian, beberapa resistor yang dipasang "berderet" (seri) masing-masing akan menyebabkan penurunan tegangan—dan besarnya penurunan ini sebanding dengan nilai resistornya (makin besar hambatan, makin besar penurunan tegangan).
+From Ohm's Law, we know that resistors *drop* voltage (indeed, the voltage drop $$V_{R}$$ over a resistor $$R$$ is $$V_{R} = I * R$$). Thus, multiple resistors "in a row" (in series) will *each* cause a drop in voltage—and the magnitude of this drop is proportional to the resistor (higher resistance, higher voltage drop).
 
-Umumnya, ketika kita mencoba menganalisis rangkaian dengan beberapa konfigurasi resistor (seri, paralel, atau kombinasi), langkah pertama adalah menentukan **hambatan pengganti**. Yaitu, bagaimana kita bisa menggabungkan semua hambatan dalam rangkaian menjadi satu nilai tunggal (disebut $$R_{total}$$ atau $$R_{equivalent}$$) yang memungkinkan kita menerapkan Hukum Ohm di seluruh rangkaian. Dalam kasus mencari arus, rumusnya menjadi $$I=\frac{V}{R_{total}}$$
+Generally, when we are trying to analyze a circuit with multiple resistor configurations (series, parallel, or a combination), the first step is to determine an **equivalent resistance**. That is, how can we combine all the resistance in the circuit to a single value (called $$R_{total}$$ or $$R_{equivalent}$$) that enables us to apply Ohm's Law across the entire circuit. In the case of solving for current, this would be $$I=\frac{V}{R_{total}}$$
 
-Jadi, mari kita coba!
+So, let's try it!
 
-### Contoh seri 1: Mencari nilai arus
+### Series example 1: Solve for current
 
-Mari kita mulai dengan rangkaian resistor seri yang paling sederhana: sebuah baterai 9V dengan resistor 100Ω dan 1kΩ yang terhubung seri.
+Let's begin with the simplest series resistor circuit: a 9V battery with 100Ω and 1kΩ resistors in series.
 
 ![A circuit with a 9V battery and two resistors in series: R1 = 100 ohms and R2 = 1 kilohm. The current I through the circuit is unknown.](assets/images/SeriesResistorCircuit_TwoResistorsOf100OhmAnd1kOhm_Step0.png)
 
-**Gambar.** Rangkaian sederhana dengan dua resistor seri (100Ω dan 1kΩ) dan baterai 9V. Berapa besar arus $$I$$ yang mengalir melalui rangkaian ini?
+**Figure.** A simple circuit with two series resistors (100Ω and 1kΩ) and a 9V battery. How much current $$I$$ is flowing through this circuit?
 {: .fs-1 }
 
-#### Langkah 1: Mencari total hambatan
+#### Step 1: Solve for total resistance
 
-Langkah pertama adalah mencari total hambatan dalam rangkaian kita. Kita tahu bahwa kita menjumlahkan hambatan dalam hubungan seri, jadi: $$R_{Total} = R_{1} + R_{2} \Rightarrow 100Ω + 1000Ω \Rightarrow 1100Ω$$. Total hambatannya adalah $$1100Ω$$.
+The first step is to solve for the total resistance in our circuit. We know that we sum resistances in series, so: $$R_{Total} = R_{1} + R_{2} \Rightarrow  100Ω + 1000Ω \Rightarrow 1100Ω$$. The total resistance is $$1100Ω$$.
 
 ![The same two-resistor series circuit, now showing the two resistors combined into a single equivalent resistor R_Total = 1100 ohms.](assets/images/SeriesResistorCircuit_TwoResistorsOf100OhmAnd1kOhm_Step1.png)
 
-**Gambar.** Untuk menemukan hambatan pengganti dari rangkaian ini (mari kita sebut sebagai $$R_{Total}$$), kita dapat menggabungkan resistor seri dengan cara menjumlahkannya.
+**Figure.** To find the equivalent resistance of this circuit (let's call this $$R_{Total}$$), we can combine series resistors by summing them.
 {: .fs-1 }
 
-#### Langkah 2: Mencari arus I dengan hambatan pengganti
+#### Step 2: Solve for current I with equivalent resistance
 
-Sekarang kita dapat menggunakan nilai hambatan pengganti $$R_{Total}$$ ini untuk mencari arus $$I$$ dengan menggunakan Hukum Ohm: $$I=9V/1100Ω \Rightarrow 0.0082A \Rightarrow 8.2mA$$
+We can now use this equivalent resistance value $$R_{Total}$$ to solve for the current $$I$$ by using Ohm's Law: $$I=9V/1100Ω \Rightarrow 0.0082A \Rightarrow 8.2mA$$
 
 ![The simplified circuit showing the equivalent resistance of 1100 ohms with the solved current I = 8.2 milliamps flowing through the circuit.](assets/images/SeriesResistorCircuit_TwoResistorsOf100OhmAnd1kOhm_Step2.png)
 
-**Gambar.** Kita sekarang mencari arus $$I$$ secara sederhana dengan Hukum Ohm: $$I=9V/1100Ω \Rightarrow 8.2mA$$
+**Figure.** We now solve for current $$I$$ simply by Ohm's Law: $$I=9V/1100Ω \Rightarrow 8.2mA$$
 {: .fs-1 }
 
-Selesai. Kita berhasil! Total arusnya adalah $$I = 8.2mA$$.
+That's it. We did it! The total current is $$I = 8.2mA$$.
 
-### Contoh seri 2: Mencari nilai arus
+### Series example 2: Solve for current
 
-Untuk memperkuat pemahaman, mari kita coba lagi tetapi dengan tiga resistor, bukan dua. Kali ini, $$R_{1}=2.2kΩ$$, $$R_{2}=1kΩ$$, dan $$R_{3}=470Ω$$.
+To reinforce understanding, let's try again but with three resistors instead of two. This time, $$R_{1}=2.2kΩ$$, $$R_{2}=1kΩ$$, and $$R_{3}=470Ω$$.
 
-Sekali lagi, kita mulai dengan mencari $$R_{Total}$$, yaitu:
+Again, we start by finding $$R_{Total}$$, which is:
 
 $$R_{Total} = R_{1} + R_{2} + R_{3} \\
 R_{Total} = 2200Ω + 1000Ω + 470Ω \\
 R_{Total} = 3670Ω$$
 
-Kita kemudian dapat menggunakan nilai hambatan pengganti ini untuk mencari arus $$I$$, yaitu $$I=\frac{9V}{3670Ω} \Rightarrow 0.002452A \Rightarrow 2.45mA$$.
+We can then use this equivalent resistance value to solve for current $$I$$, which is $$I=\frac{9V}{3670Ω} \Rightarrow 0.002452A \Rightarrow 2.45mA$$.
 
 ![A series circuit with three resistors (2.2 kilohms, 1 kilohm, and 470 ohms) and a 9V battery. The resistors are combined into R_Total = 3670 ohms, and the solved current is I = 2.45 milliamps.](assets/images/SeriesResistorCircuit_ThreeResistors_Solved.png)
 
-**Gambar.** Pada gambar di atas, kita mencari arus dengan tiga resistor seri. Pertama, jumlahkan hambatan-hambatan tersebut (karena terhubung seri) lalu gunakan total hambatan ($$R_{Total}$$) ini untuk menentukan arus dengan Hukum Ohm: $$I=\frac{V}{R_{Total}} \Rightarrow \frac{9V}{3670Ω} \Rightarrow 2.45mA$$ (dibulatkan menjadi 2.5mA pada gambar).
+**Figure.** In the image above, we solve for current with three series resistors. First, sum the resistances (because they are in series) and then use this aggregate resistance ($$R_{Total}$$) to determine current with Ohm's Law: $$I=\frac{V}{R_{Total}} \Rightarrow \frac{9V}{3670Ω} \Rightarrow 2.45mA$$ (rounded to 2.5A in the figure).
 {: .fs-1 }
 
-#### Memeriksa hasil kerja kita di simulator rangkaian
+#### Check our work in a circuit simulator
 
-Kita bisa memeriksa hasil kerja kita di simulator rangkaian favorit kita, bebas apa saja yang Anda suka. :)
+We can check our work in our favorite circuit simulator, which is whatever you like. :)
 
-Saya akan menggunakan alat sumber terbuka [CircuitJS](https://www.falstad.com/circuit/circuitjs.html). Simulasi spesifiknya ada [di sini](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rzCEqo2lWJQpMBGwDug8CIoo8SquwBOKtWAyEdIFAgNUUaSG20JVRjLxtrsNqWHhXD2Qmse0aaqhoMSwUwHj4BXxp+cHlDYSpfPQMUON9jA3T7IzTbZwc87xyFKP9DaIFUoA).
+I will use the open-source tool [CircuitJS](https://www.falstad.com/circuit/circuitjs.html). The specific simulation is [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rzCEqo2lWJQpMBGwDug8CIoo8SquwBOKtWAyEdIFAgNUUaSG20JVRjLxtrsNqWHhXD2Qmse0aaqhoMSwUwHj4BXxp+cHlDYSpfPQMUON9jA3T7IzTbZwc87xyFKP9DaIFUoA).
 
-Kita bisa mengklik kabel untuk secara ajaib menampilkan berapa banyak arus yang mengalir melaluinya atau untuk menunjukkan potensial listriknya (tegangan) terhadap ground. Dan benar saja, Anda akan melihat bahwa memang $$2.5mA$$ mengalir melalui rangkaian tersebut. Apa lagi yang Anda amati?
+We can click on the wires to magically show how much current is traveling through them or to show their electric potential (voltage) with respect to ground. And sure enough, you'll see that indeed $$2.5mA$$ is traveling through the circuit. What else do you observe?
 
-Nah, ingat bagaimana kita terus menekankan bahwa tegangan itu *terbagi* atau *dipecah* pada resistor-resistor yang terhubung seri. Anda dapat melihat ini dengan jelas juga! Tegangan berada pada $$9V$$ di simpul atas tetapi turun sebesar $$5.4V$$ setelah melewati resistor $$2.2kΩ$$ menjadi $$3.6V$$, yang kemudian turun lagi sebesar $$2.4V$$ setelah melewati resistor $$1kΩ$$ sehingga hanya menyisakan potensial listrik sebesar $$1.2V$$ sebelum akhirnya turun menjadi $$0V$$ atau $$GND$$ setelah melewati resistor $$470Ω$$. Kita akan membahas lebih banyak tentang ini selanjutnya!
+Well, remember how we've been emphasizing that voltages are *split* or *divided* across resistors in series. You can clearly see this as well! The voltage is at $$9V$$ at the top node but drops by $$5.4V$$ over the $$2.2kΩ$$ resistor to $$3.6V$$, which then drops by $$2.4V$$ over the $$1kΩ$$ resistor leaving just $$1.2V$$ of electric potential before finally dropping down to $$0V$$ or $$GND$$ across the $$470Ω$$ resistor. We'll talk more about this next!
 
 <video autoplay loop muted playsinline aria-label="CircuitJS simulation of a three-resistor series circuit with a 9V battery, showing animated current flow of 2.5 milliamps and voltage drops across each resistor.">
   <source src="assets/videos/SeriesResistorThreeResistors9VBattery2.2k1k470_CircuitJSRecording.mp4" type="video/mp4" />
 </video>
 
-**Gambar.** Video ini menunjukkan simulasi [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) dari rangkaian seri dasar tiga resistor. Anda dapat mencoba rangkaian ini [di sini](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rzCEqo2lWJQpMBGwDug8CIoo8SquwBOKtWAyEdIFAgNUUaSG20JVRjLxtrsNqWHhXD2Qmse0aaqhoMSwUwHj4BXxp+cHlDYSpfPQMUON9jA3T7IzTbZwc87xyFKP9DaIFUoA).
+**Figure.** This video shows a [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a basic three resistor series circuit. You can play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rzCEqo2lWJQpMBGwDug8CIoo8SquwBOKtWAyEdIFAgNUUaSG20JVRjLxtrsNqWHhXD2Qmse0aaqhoMSwUwHj4BXxp+cHlDYSpfPQMUON9jA3T7IzTbZwc87xyFKP9DaIFUoA).
 {: .fs-1 }
 
-## Pembagi tegangan (Voltage Divider)
+## Voltage dividers
 
-Gagasan bahwa **resistor seri** membagi tegangan adalah konsep yang sangat penting saat bekerja dengan mikrokontroler. Oleh karena itu, hal ini layak mendapatkan penekanan tersendiri.
+The notion that **series resistors** split voltages is a critical concept when working with microcontrollers. So, it deserves its own emphasis.
 
-Hal utama yang perlu diingat: ada *penurunan tegangan* di setiap resistor (ini selalu terjadi, tidak hanya dalam konfigurasi rangkaian seri). Jadi, di antara setiap resistor kita memiliki *potensial listrik* atau tegangan yang berbeda. Dan karena mikrokontroler "membaca" tegangan alih-alih arus, kita dapat menggunakan sifat ini untuk mengontrol input dinamis ke dalam mikrokontroler kita!
+The key thing to remember: there is a *voltage drop* across each resistor (this is always the case, not just in a series circuit configuration). Thus, between each resistor we have a different *electric potential* or voltage. And because microcontrollers "read" voltage rather than current, we can use this property to control dynamic input into our microcontroller!
 
-Mari kita bahas beberapa contoh.
+Let's go over some examples.
 
-### Contoh 1: Mencari tegangan pada VB
+### Example 1: Solve for voltage at VB
 
-Dengan ide tentang tegangan yang turun di setiap resistor ini, mari kita lihat bagaimana cara menghitung tegangan pada simpul $$V_{B}$$ terhadap ground (dan ingat, simpul/node adalah titik pertemuan mana pun dengan dua atau lebih sambungan dalam sebuah rangkaian).
+With this idea of voltages dropping across each resistor, let's look at how to calculate the voltage at the node $$V_{B}$$ with respect to ground (and remember, a node is just any junction point with two or more connections in a circuit).
 
-Sebelum melanjutkan ke contoh kita, berhenti sejenak dan tanyakan pada diri Anda: bagaimana Anda akan menghitung tegangan pada $$V_{B}$$?
+Before moving through our example, stop and ask yourself: how would you calculate the voltage at $$V_{B}$$?
 
 ![A series circuit with a 9V battery, R1 = 100 ohms, and R2 = 150 ohms. The node between the two resistors is labeled V_B, and the question asks: what is the voltage at V_B?](assets/images/VoltageDivider_100And150_ByJonFroehlich.png)
 
-#### Langkah 1: Cari arus yang mengalir melalui rangkaian
+#### Step 1: Solve for the current through the circuit
 
-Seperti sebelumnya, langkah pertama adalah mencari arus yang mengalir melalui rangkaian. Kita melakukan ini, sekali lagi, dengan mencari hambatan pengganti $$R_{Total}$$ dan menggunakan Hukum Ohm. Jadi, $$I=\frac{V}{R_{Total}} \Rightarrow \frac{9V}{250Ω} \Rightarrow 36mA$$.
+As before, the first step is to solve for the current through the circuit. We do this, again, by finding the equivalent resistance $$R_{Total}$$ and using Ohm's Law. So, $$I=\frac{V}{R_{Total}} \Rightarrow \frac{9V}{250Ω} \Rightarrow 36mA$$.
 
 ![The same voltage divider circuit now showing R_Total = 250 ohms and the solved current I = 36 milliamps.](assets/images/VoltageDivider_100And150_Step1_ByJonFroehlich.png)
 
-#### Langkah 2: Hitung penurunan tegangan pada masing-masing resistor
+#### Step 2: Calculate voltage drop across resistors
 
-Seknow setelah kita mengetahui total arus yang mengalir melalui rangkaian kita ($$36mA$$), kita dapat menggunakannya untuk menghitung penurunan tegangan spesifik di setiap resistor. Mari kita sebut penurunan tegangan pada $$R_{1}$$ sebagai $$V_{1}$$ dan penurunan tegangan pada $$R_{2}$$ sebagai $$V_{2}$$. Dan karena kita tertarik untuk menghitung tegangan, kita akan menggunakan rumusan Hukum Ohm ini: $$V = I * R$$.
+Now that we know the total current flowing through our circuit ($$36mA$$), we can use this to calculate the specific voltage drop across each resistor. Let's call the voltage drop over $$R_{1}$$: $$V_{1}$$ and the voltage drop over $$R_{2}$$: $$V_{2}$$. And because we are interested in calculating voltage, we will use this formulation of Ohm's Law: $$V = I * R$$.
 
-Maka:
+Thus:
 
 $$
 {V_1} = I * R_1 \Rightarrow 0.036A * 100Ω \Rightarrow 3.6V \\
 {V_2} = I * R_2 \Rightarrow 0.036A * 150Ω \Rightarrow 5.4V
 $$
 
-Dan, sekadar memeriksa cepat hasil kerja kita (tanpa membahas terlalu detail), kita tahu dari [Hukum rangkaian Kirchhoff](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-kirchhoffs-laws), bahwa $$V_{Total} = V_1 + V_2 \Rightarrow 9V = 3.6V + 5.4V \Rightarrow 9V = 9V$$. Jadi, sejauh ini semuanya terlihat benar!
+And, just as a quick check on our work (and without going into too much detail), we know from [Kirchhoff's circuit laws](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-kirchhoffs-laws), that $$V_{Total} = V_1 + V_2 \Rightarrow 9V = 3.6V + 5.4V \Rightarrow 9V = 9V$$. So, things are looking good so far!
 
 ![The voltage divider circuit with annotations showing the voltage drop V1 = 3.6V across R1 and V2 = 5.4V across R2, with the current I = 36 milliamps labeled.](assets/images/VoltageDivider_100And150_Step2_ByJonFroehlich.png)
 
-#### Langkah 3: Sekarang hitung VB
+#### Step 3: Now calculate VB
 
-Sekarang sangat mudah untuk menghitung $$V_B$$. Kita tahu bahwa $$V_A = 9V$$ dan $$R_1$$ menyebabkan penurunan tegangan sebesar $$3.6V$$. Jadi, $$V_B$$ harus sama dengan $$9V - 3.6V$$, yaitu 5.4V.
+Now it is trivial to calculate $$V_B$$. We know that $$V_A = 9V$$ and that $$R_1$$ causes a $$3.6V$$ voltage drop. So, $$V_B$$ must be equal to $$9V - 3.6V$$, which is 5.4V.
 
 ![The completed voltage divider analysis showing V_A = 9V at the top, a 3.6V drop across R1, and V_B = 5.4V at the node between the two resistors.](assets/images/VoltageDivider_100And150_Step3_ByJonFroehlich.png)
 
-### Pola pembagi tegangan
+### The voltage divider pattern
 
-Kita menyebut konfigurasi dua resistor seperti ini sebagai **pembagi tegangan** (voltage divider) tepat karena, seperti yang Anda lihat, konfigurasi ini membagi tegangan. Dalam kasus ini, kita menggunakan resistor $$100Ω$$ dan $$150Ω$$ seri untuk menghasilkan output $$5.4V$$ pada $$V_B$$.
+We call a two-resistor configuration like this a **voltage divider** precisely because, as you can see, it divides the voltages. In this case, we used $$100Ω$$ and $$150Ω$$ resistors in series to output a $$5.4V$$ at $$V_B$$.
 
-Menggunakan Hukum Ohm, kita dapat [menurunkan persamaan pembagi tegangan](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) untuk $$V_B$$ berdasarkan tegangan input ($$V_A$$) ke dalam jaringan pembagi tegangan kita dan kedua resistor tersebut: resistor atas $$R_1$$ dan resistor bawah $$R_2$$.
+Using Ohm's Law, we can [derive the voltage divider equation](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) for $$V_B$$ in terms of the input voltage ($$V_A$$) into our voltage divider network and the two resistors: the top resistor $$R_1$$ and the bottom resistor $$R_2$$.
 
-Persamaan pembagi tegangan ini adalah:
+This voltage divider equation is thus:
 $$V_{B} = V_{A} * \frac{R_2}{R_1 + R_2}$$
 
-Atau lebih umum ditulis sebagai:
+Or more commonly written as:
 $$V_{out} = V_{in} * \frac{R_2}{R_1 + R_2}$$
 
 ![A generic voltage divider schematic showing V_in at the top, R1 and R2 in series, V_out at the node between R1 and R2, and the voltage divider equation V_out = V_in times R2 divided by (R1 + R2).](assets/images/VoltageDividerBasic_ByJonFroehlich.png)
 
-**Gambar.** Pola dan persamaan pembagi tegangan. Gambar dibuat di PowerPoint. Lihat [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) untuk informasi lebih lanjut.
+**Figure.** The voltage divider pattern and equation. Image made in PowerPoint. See [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) for more.
 {: .fs-1 }
 
-Yang penting, seperti yang dapat Anda ketahui dari persamaan tersebut, bukanlah nilai hambatan absolut yang menentukan melainkan **rasio** antara $$R_1$$ dan $$R_2$$ yang mengontrol $$V_{out}$$. Oleh karena itu, untuk tujuan *membagi tegangan*, memilih $$R_1 = 100Ω$$ and $$R_2 = 100Ω$$ akan sama saja dengan $$R_1 = 2.2kΩ$$ and $$R_2 = 2.2kΩ$$, keduanya akan membagi tegangan sama rata. Jadi, $$V_{out}$$ akan sama dengan $$4.5V$$ jika $$V_{in}=9V$$.
+Importantly, as you can tell from the equation, it is *not* the absolute resistances that matter but rather **the ratio** of $$R_1$$ to $$R_2$$ that controls $$V_{out}$$. Thus, for the purposes of *dividing voltages*, setting $$R_1 = 100Ω$$ and $$R_2 = 100Ω$$ would be the same as $$R_1 = 2.2kΩ$$ and $$R_2 = 2.2kΩ$$, they would both divide the voltages evenly. So, $$V_{out}$$ would equal $$4.5V$$ if $$V_{in}=9V$$.
 
-Namun, jumlah arus di antara kedua rangkaian tersebut akan sangat berbeda, pada opsi pertama: $$I = \frac{9V}{200Ω} \Rightarrow 45mA$$ dan opsi kedua: $$I = \frac{9V}{4.4kΩ} \Rightarrow 2.0mA$$.
+However, the amount of current between the two circuits would be significantly different with the former: $$I = \frac{9V}{200Ω} \Rightarrow 45mA$$ and the latter: $$I = \frac{9V}{4.4kΩ} \Rightarrow 2.0mA$$.
 
 {: .note }
-> **Toleransi di Dunia Nyata dan Pembagi Tegangan.** Dalam perhitungan matematika kita, kita mengasumsikan resistor kita benar-benar sempurna. Namun ingat bahwa resistor fisik memiliki nilai **toleransi**! 
+> **Real-World Tolerance and Voltage Dividers.** In our math, we assume our resistors are completely perfect. But remember that physical resistors have a **tolerance** rating! 
 >
-> Jika Anda membuat pembagi tegangan 50/50 menggunakan dua resistor 10kΩ dengan peringkat toleransi ±5%, satu resistor mungkin sebenarnya terukur 9.5kΩ dan yang lainnya 10.5kΩ. Karena ketidakseimbangan kecil ini, tegangan output dunia nyata Anda tidak akan *tepat* setengah dari tegangan input Anda. Jika Anda mengukur rangkaian fisik Anda dengan multimeter dan angkanya sedikit melesat dari teori matematika Anda, toleransi komponen hampir pasti merupakan penyebabnya!
+> If you build a 50/50 voltage divider using two 10kΩ resistors with a ±5% tolerance, one might actually measure 9.5kΩ and the other 10.5kΩ. Because of this slight imbalance, your real-world output voltage won't be *exactly* half of your input voltage. If you measure your physical circuit with a multimeter and the numbers are slightly off from your theoretical math, component tolerance is almost certainly the culprit!
 
-Bukankah akan keren jika kita bisa mengontrol salah satu nilai resistor tersebut secara dinamis untuk menghasilkan tegangan variabel pada $$V_{out}$$? Ya! Dan inilah dasar dari sebuah [potensiometer](variable-resistors.md), yang akan kita pelajari pada pelajaran selanjutnya.
+Wouldn't it be cool to dynamically control one of those resistor values to output a variable voltage at $$V_{out}$$? Yes! And this is the basis of a [potentiometer](variable-resistors.md), which we will learn about in a later lesson.
 
-### Mengapa pembagi tegangan penting untuk physical computing?
+### Why do voltage dividers matter for physical computing?
 
-Mikrokontroler seperti Arduino hanya dapat "membaca" tingkat tegangan (melalui pengubah analog-ke-digital atau ADC mereka), bukan hambatan secara langsung. Jadi, ketika kita menggunakan sensor resistif seperti fotosel (LDR), resistor sensor tekanan (FSR), atau termistor, kita menempatkannya dalam konfigurasi pembagi tegangan. Seiring berubahnya hambatan sensor sebagai respons terhadap cahaya, tekanan, atau suhu, tegangan pada $$V_{out}$$ berubah secara proporsional—dan *itulah* yang dibaca oleh mikrokontroler. Anda akan melihat pola ini berulang kali mulai dari [pelajaran Arduino](../arduino/index.md).
+Microcontrollers like the Arduino can only "read" voltage levels (through their analog-to-digital converters), not resistance directly. So, when we use resistive sensors like photocells, force-sensitive resistors, or thermistors, we place them in a voltage divider configuration. As the sensor's resistance changes in response to light, pressure, or temperature, the voltage at $$V_{out}$$ changes proportionally—and *that's* what the microcontroller reads. You'll see this pattern repeatedly starting in the [Arduino lessons](../arduino/index.md).
 
-#### Menurunkan persamaan pembagi tegangan
+#### Deriving the voltage divider equation
 
-Mengingat apa yang Anda pelajari tentang rangkaian, Anda sekarang memiliki pengetahuan untuk menurunkan persamaan pembagi tegangan atau, setidaknya, memahami *how* persamaan itu diturunkan. Mari kita lihat!
+Given what you are learning about circuits, you now have the knowledge to derive the voltage divider equation or, at the very least, understand *how* it is derived. Let's take a look!
 
 ![A step-by-step algebraic derivation of the voltage divider equation, starting from Ohm's Law and Kirchhoff's Voltage Law, arriving at V_out = V_in times R2 divided by (R1 + R2).](assets/images/DerivingTheVoltageDividerEquation_ByJonFroehlich.png)
-**Gambar.** Penurunan persamaan pembagi tegangan. Lihat [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) untuk informasi lebih lanjut.
+**Figure.** A derivation of the voltage divider equation. See [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider) for more.
 {: .fs-1 }
 
-Menggunakan gambar di atas, mari kita identifikasi dan tulis apa yang kita ketahui. Kita tahu bahwa penurunan tegangan pada $$R2$$ sama dengan $$V_{out}$$ (memang, keduanya adalah hal yang sama) dan bahwa $$V_R2=I*R2$$:
+Using the figure above, let's identify and write down what we know. We know that the voltage drop over $$R2$$ is equal to $$V_{out}$$ (indeed, they are the same thing) and that $$V_R2=I*R2$$:
 
 $$V_{out} = V_{R2} = I * R2$$
 
-Kita juga tahu bahwa $$V_{in}$$ sama dengan $$V_R1 + V_R2$$ berdasarkan [Hukum Tegangan Kirchhoff](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-kirchhoffs-laws).
+We also know that $$V_{in}$$ is equal to $$V_R1 + V_R2$$ given [Kirchhoff's Voltage Law](https://www.khanacademy.org/science/physics/circuits-topic/circuits-resistance/a/ee-kirchhoffs-laws).
 
 $$V_{in} = V_{R1} + V_{R2}$$
 
-Menggunakan Hukum Ohm, kita dapat mengganti $$I * R1$$ untuk $$V_{R1}$$ dan $$I * R2$$ untuk $$V_{R2}$$.
+Using Ohm's Law, we can substitute $$I * R1$$ for $$V_{R1}$$ and $$I * R2$$ for $$V_{R2}$$.
 
 $$V_{in} = I * R1 + I * R2$$
 
-Sekarang, atur ulang persamaan $$V_{in}$$ menggunakan aljabar:
+Now, rearrange the $$V_{in}$$ equation using algebra:
 
 $$V_{in} = I * (R1 + R2) \Rightarrow I = \frac{V_{in}}{(R1 + R2)}$$
 
-Kembali ke $$V_{out} = I * R2$$, kita dapat menyubstitusikan $$I$$ berdasarkan rumusan di atas:
+Returning to $$V_{out} = I * R2$$, we can substitute $$I$$ given the formulation above:
 
 $$V_{out} = I * R2 = \frac{V_{in}}{(R1 + R2)} * R2$$
 
-Terakhir, atur ulang persamaan di atas untuk mendapatkan persamaan pembagi tegangan yang populer:
+Finally, rearrange the above to achieve the popular voltage divider equation:
 
 $$V_{out} = V_{in} * \frac{R2}{(R1 + R2)}$$
 
 {: .note }
-Agar persamaan pembagi tegangan ini tetap berlaku, arus $$I$$ yang mengalir melalui $$R_1$$ harus (secara garis besar) sama dengan arus yang mengalir melalui $$R_2$$. Artinya, jika kita menghubungkan sebuah cabang ke $$V_{out}$$, seperti yang telah kita lakukan di bawah ini, maka cabang ini harus memiliki **hambatan yang sangat tinggi** sehingga sangat sedikit arus yang "bocor" ke cabang tersebut: $$R_{Load}$$ harus beberapa kali lipat lebih besar daripada $$R1 + R2$$. Dalam kasus pin input mikrokontroler, *untungnya* hal ini terpenuhi, yang akan kita bahas kembali nanti (*misalnya*, dalam [pelajaran "Menggunakan tombol"](../arduino/buttons.md)).
+For this voltage divider equation to hold true, the current $$I$$ flowing through $$R_1$$ must be (largely) equal to the current flowing through $$R_2$$. That is, if we hook up a branch to $$V_{out}$$, as we've done below, then this branch must have very **high resistance** so that very little current "leaks" out into that branch: $$R_{Load}$$ must be orders of magnitude greater than $$R1 + R2$$. In the case of microcontroller inputs, this is *fortunately* the case, which we will return to later (*e.g.,* in the ["Using buttons" lesson](../arduino/buttons.md)).
 
 ![A voltage divider circuit with a load resistor R_Load connected at V_out. An annotation notes that R_Load must be much larger than R1 + R2 for the voltage divider equation to remain accurate.](assets/images/VoltageDividerWithHighResistanceLoad.png)
-**Gambar.** Persamaan pembagi tegangan hanya berlaku ketika $$R_{Load}$$ bernilai besar, keadaan yang akan terpenuhi ketika kita mulai menggunakan mikrokontroler (yang membaca perubahan level tegangan dan memiliki "impedansi input tinggi").
+**Figure.** The voltage divider equation only holds when $$R_{Load}$$ is large, which it will be when we start using microcontrollers (which read changes in voltage levels and have "high input impedance").
 {: .fs-1 }
 
 <!-- TODO: Khan Academy has a nice derivation of this: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-voltage-divider -->
@@ -255,98 +255,98 @@ Agar persamaan pembagi tegangan ini tetap berlaku, arus $$I$$ yang mengalir mela
 
 <!-- Another discussion of voltage dividers: https://learning.oreilly.com/library/view/practical-electronics-components/9781449373221/ch01.html  -->
 
-## Resistor paralel
+## Parallel resistors
 
-Jika **resistor seri** mengalirkan arus yang sama tetapi membagi tegangan, [**resistor paralel**](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors) memiliki tegangan yang sama tetapi membagi arus. Komponen dalam hubungan paralel terlihat seperti ini:
+Whereas **series resistors** carry the same current but divide voltage, [**parallel resistors**](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors) have the same voltage but divide current. Components in parallel look like this:
 
 ![Two diagrams showing components in parallel: on the left, a generic representation of three components whose tops all connect at one shared node and bottoms all connect at another shared node; on the right, a circuit schematic with parallel resistors between two nodes.](assets/images/ComponentsInParallel_KhanAcademyAndJonFroehlich.png)
 
-**Gambar.** Komponen dikatakan paralel jika kepala mereka berbagi satu simpul dan ekor mereka berbagi simpul yang lain. Gambar di sebelah kiri dari [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors). Gambar dibuat di PowerPoint.
+**Figure.** Components are in parallel if their heads share a node and their tails share a node. Image on left from [Khan Academy](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors). Image made in PowerPoint.
 {: .fs-1 }
 
-### Contoh paralel 1: Mencari $$I_{Total}$$
+### Parallel example 1: Solve for $$I_{Total}$$
 
-Pada rangkaian di bawah ini, kita memiliki dua resistor paralel $$R_1=100Ω$$ and $$R_2=1kΩ$$. Mari kita cari total arus $$I_{Total}$$ dalam rangkaian tersebut.
+In the circuit below, we have two parallel resistors $$R_1=100Ω$$ and $$R_2=1kΩ$$. Let's solve for the total current $$I_{Total}$$ in the circuit.
 
 ![A circuit with a 9V battery and two resistors in parallel: R1 = 100 ohms and R2 = 1 kilohm. The total current I_Total is unknown.](assets/images/ParallelResistorCircuit_TwoResistors_ByJonFroehlich.png)
 
-#### Langkah 1: Amati bahwa $$I_{Total}$$ terbagi ke dalam cabang-cabang
+#### Step 1: Observe that $$I_{Total}$$ splits into branches
 
-Hal pertama yang harus disadari adalah bahwa $$I_{Total}$$ terbagi menjadi dua cabang. Mari kita sebut arus yang turun ke kedua cabang tersebut sebagai $$I_1$$ dan $$I_2$$. Dari Hukum Kirchhoff, kita tahu bahwa $$I_{Total} = I_1 + I_2$$. Hal ini dikarenakan hukum kekekalan muatan—tidak ada muatan yang hilang dalam rangkaian kita (mereka hanya mengalir berputar terus-menerus).
+The first thing to recognize is that $$I_{Total}$$ splits into two branches. Let's call the current down those two branches $$I_1$$ and $$I_2$$. From Kirchhoff's Laws, we know that $$I_{Total} = I_1 + I_2$$. This is due to the conservation of charge—no charges are lost in our circuit (they simply flow around and around).
 
 ![The same parallel circuit with annotations showing I_Total splitting into two branch currents: I1 flowing through R1 and I2 flowing through R2.](assets/images/ParallelResistorCircuit_TwoResistors_Step1_ByJonFroehlich.png)
 
-#### Langkah 2: Identifikasi dan beri nama simpul (node)
+#### Step 2: Identify and name nodes
 
-Sadarilah juga bahwa hanya ada dua *simpul* di dalam rangkaian kita. Kita dapat memberi label pada mereka sebagai $$Simpul A$$ dan $$Simpul B$$.
+Also recognize that there are only two *nodes* in our circuit. We can label them $$Node A$$ and $$Node B$$.
 
 ![The parallel circuit with the two nodes labeled: Node A at the top where the branches split, and Node B at the bottom where the branches rejoin.](assets/images/ParallelResistorCircuit_TwoResistors_Step2_ByJonFroehlich.png)
 
-#### Langkah 3: Tentukan $$V_A$$
+#### Step 3: Define $$V_A$$
 
-Karena $$Simpul A$$ terhubung langsung ke terminal positif baterai, simpul ini memiliki potensial listrik sebesar 9V. Mari kita sebut ini sebagai $$V_A = 9V$$. Demikian pula, $$Simpul B$$ terhubung langsung ke terminal negatif baterai, jadi mari kita sebut ini sebagai $$GND$$ atau $$0V$$.
+Because $$Node A$$ is directly connected to the positive terminal of the battery, it has an electric potential of 9V. Let's call this $$V_A = 9V$$. Similarly, $$Node B$$ is directly connected to the negative terminal of the battery, so let's refer to this as $$GND$$ or $$0V$$.
 
 ![The parallel circuit with Node A labeled as V_A = 9V and Node B labeled as GND (0V).](assets/images/ParallelResistorCircuit_TwoResistors_Step3_ByJonFroehlich.png)
 
-#### Langkah 4: Cari nilai $$I_1$$ dan $$I_2$$
+#### Step 4: Solve for $$I_1$$ and $$I_2$$
 
-Menggunakan Hukum Ohm, sekarang kita dapat mencari $$I_1$$ dan $$I_2$$ di mana: $$I_1 = \frac{V_A}{R_1}$$ dan $$I_2 = \frac{V_A}{R_2}$$. Maka, $$I_1 = \frac{9V}{100Ω} \Rightarrow 90mA$$ dan $$I_2 = \frac{9V}{1000Ω} \Rightarrow 9mA$$.
+Using Ohm's Law, we can now solve for $$I_1$$ and $$I_2$$ where: $$I_1 = \frac{V_A}{R_1}$$ and $$I_2 = \frac{V_A}{R_2}$$. Thus, $$I_1 = \frac{9V}{100Ω} \Rightarrow 90mA$$ and $$I_2 = \frac{9V}{1000Ω} \Rightarrow 9mA$$.
 
 ![The parallel circuit with the solved branch currents: I1 = 90 milliamps through R1 (100 ohms) and I2 = 9 milliamps through R2 (1 kilohm).](assets/images/ParallelResistorCircuit_TwoResistors_Step4_ByJonFroehlich.png)
 
-Berhenti sejenak. Pikirkan hasil-hasil ini. Apakah secara *konseptual* masuk akal?
+Stop for a moment. Think about these results. Do they *conceptually* make sense?
 
-Menggunakan Hukum Ohm, kita menemukan bahwa arus yang mengalir melalui cabang $$I_1$$ adalah **10 kali** lebih banyak daripada cabang $$I_2$$. Tentu saja, ini sangat cocok dengan rasio kedua resistor R1 dan R2: R1 bernilai 10 kali lebih kecil dari R2 dan karena itu, arus yang mengalir melalui cabang $$I_1$$ akan lebih banyak (10x lebih banyak!). Ini masuk akal: sama seperti air yang akan mengalir lebih banyak melalui cabang yang memiliki hambatan lebih kecil, begitu pula arus listrik akan mengalir lebih banyak melalui jalur yang hambatannya lebih kecil.
+Using Ohm's Law, we found that **10 times** as much current flows through the $$I_1$$ branch as the $$I_2$$ branch. Indeed, this exactly matches the ratio of the two resistors R1 and R2: R1 is 10 times smaller than R2 and thus, more current will flow through $$I_1$$ branch (10x more!). This makes sense: just as more water will flow through a branch with less resistance, so too will more current flow through the path of less resistance.
 
-#### Langkah 5: Terakhir, cari nilai $$I_{Total}$$
+#### Step 5: Finally, solve for $$I_{Total}$$
 
-Terakhir, kita dapat menggunakan $$I_{Total} = I_1 + I_2$$ to solve for $$I_{Total}$$. Dalam kasus ini, $$I_{Total} = 90mA + 9mA \Rightarrow 99mA$$.
+Finally, we can use $$I_{Total} = I_1 + I_2$$ to solve for $$I_{Total}$$. In this case, $$I_{Total} = 90mA + 9mA \Rightarrow 99mA$$.
 
 ![The completed parallel circuit analysis showing I1 = 90 milliamps, I2 = 9 milliamps, and I_Total = 99 milliamps.](assets/images/ParallelResistorCircuit_TwoResistors_Step5_ByJonFroehlich.png)
 
-#### Langkah 6: Gunakan hambatan pengganti untuk memeriksa hasil kerja kita
+#### Step 6: Use equivalent resistance to check our work
 
-Ingat bagaimana kita memperkenalkan persamaan untuk hambatan pengganti pada rangkaian resistor paralel? Persamaannya adalah:
+Remember how we introduced an equation for equivalent resistance in parallel resistor circuits? The equation is:
 
 $$R_{equivalent} = \frac{1}{\frac{1}{R_{1}} + \frac{1}{R_{2}} + ... + \frac{1}{R_{N-1}} + \frac{1}{R_{N}}}$$
 
-Sebagai catatan sampingan, jika Anda penasaran dengan penurunannya, lihat [pelajaran Khan Academy ini](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors)—tetapi, singkatnya, Anda dapat menurunkannya dari Hukum Ohm (dan langkah-langkah yang kita ikuti di atas).
+As an aside, if you're curious about its derivation, see this [Khan Academy lesson](https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-parallel-resistors)—but, in short, you can derive it from Ohm's Law (and the steps that we followed above).
 
-Kita dapat menggunakan persamaan ini untuk mencari $$I_{Total}$$ secara lebih cepat, yaitu $$I_{Total} = \frac{V_A}{R_{equivalent}}$$.
+We can use this equation to more quickly solve for $$I_{Total}$$, which is $$I_{Total} = \frac{V_A}{R_{equivalent}}$$.
 
-Kita tahu bahwa $${R_{equivalent} = \frac{1}{\frac{1}{100Ω} + \frac{1}{1kΩ}}} \Rightarrow 90.9Ω$$
+We know that $${R_{equivalent} = \frac{1}{\frac{1}{100Ω} + \frac{1}{1kΩ}}} \Rightarrow 90.9Ω$$
 
-Maka, $$I_{Total} = \frac{9V}{90.91Ω} \Rightarrow 99mA$$.
+Thus, $$I_{Total} = \frac{9V}{90.91Ω} \Rightarrow 99mA$$.
 
-#### Memeriksa hasil kerja kita di simulator rangkaian
+#### Check our work in a circuit simulator
 
-Kita juga bisa memeriksa hasil kerja kita di simulator rangkaian. Saya membuat rangkaian yang sama di CircuitJS, yang dapat Anda lihat [di sini](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rxR48UMTSrExVGAjYB3QSGGjsCISPBsATiDW9s2QnvW0wxqmDg7axY4eM07Zi8muL9yzU+MqoCpRp+E14ggXYPUzDbR2DIAM8-TwctRR8vUXSUiJCXXOj4tOcacxi+AXigA).
+We can also check our work in a circuit simulator. I built the same circuit in CircuitJS, which you can view [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rxR48UMTSrExVGAjYB3QSGGjsCISPBsATiDW9s2QnvW0wxqmDg7axY4eM07Zi8muL9yzU+MqoCpRp+E14ggXYPUzDbR2DIAM8-TwctRR8vUXSUiJCXXOj4tOcacxi+AXigA).
 
-Apakah visualisasinya sesuai dengan ekspektasi Anda?
+Does the visualization match your expectation?
 
 <video autoplay loop muted playsinline aria-label="CircuitJS simulation of a two-resistor parallel circuit with a 9V battery, showing 90 milliamps through the 100 ohm resistor, 9 milliamps through the 1 kilohm resistor, and a total current of 99 milliamps.">
   <source src="assets/videos/SimpleParallelResistorCircuit_9VBattery100And1kOhmResistors_CircuitJSRecording.mp4" type="video/mp4" />
 </video>
 
-**Gambar.** Video ini menunjukkan simulasi [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) dari rangkaian paralel dasar dua resistor. Anda dapat mencoba rangkaian ini [di sini](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rxR48UMTSrExVGAjYB3QSGGjsCISPBsATiDW9s2QnvW0wxqmDg7axY4eM07Zi8muL9yzU+MqoCpRp+E14ggXYPUzDbR2DIAM8-TwctRR8vUXSUiJCXXOj4tOcacxi+AXigA).
+**Figure.** This video shows a [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) simulation of a basic two resistor parallel circuit. You can play with the circuit [here](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgpABZsKBTAWjDACgA3cYlWwm7rxR48UMTSrExVGAjYB3QSGGjsCISPBsATiDW9s2QnvW0wxqmDg7axY4eM07Zi8muL9yzU+MqoCpRp+E14ggXYPUzDbR2DIAM8-TwctRR8vUXSUiJCXXOj4tOcacxi+AXigA).
 {: .fs-1 }
 
 {: .note }
-> **Jalur pintas dua resistor.** Ketika Anda memiliki tepat dua resistor dalam hubungan paralel, rumus hambatan pengganti menyusut menjadi rumus pintas "perkalian dibagi penjumlahan":
+> **Two-resistor shortcut.** When you have exactly two resistors in parallel, the equivalent resistance formula simplifies to the "product over sum" shortcut:
 >
 > $$R_{equivalent} = \frac{R_1 \times R_2}{R_1 + R_2}$$
 >
-> Untuk contoh kita: $$R_{equivalent} = \frac{100 \times 1000}{100 + 1000} = \frac{100000}{1100} = 90.9Ω$$. Ini jauh lebih mudah dihitung daripada bentuk kebalikan-dari-kebalikan, terutama di atas kertas. Perhatikan bahwa jalur pintas ini hanya berlaku untuk tepat dua resistor secara paralel.
+> For our example: $$R_{equivalent} = \frac{100 \times 1000}{100 + 1000} = \frac{100000}{1100} = 90.9Ω$$. This is much easier to compute than the reciprocal-of-reciprocals form, especially on paper. Note that this shortcut only works for exactly two resistors in parallel.
 
 TODO: add in strategy for simplifying: https://www.khanacademy.org/science/electrical-engineering/ee-circuit-analysis-topic/ee-resistor-circuits/a/ee-simplifying-resistor-networks -->
 
-## Aktivitas
+## Activity
 
-Buatlah dua buah rangkaian resistor seri dan dua buah rangkaian resistor paralel. Dengan menggunakan apa yang telah Anda pelajari, cari nilai *arus* pada masing-masing rangkaian secara manual (baik menggunakan pensil+kertas atau secara digital). Tunjukkan pengerjaan langkah demi langkah Anda. Periksa hasil kerja Anda dengan membuat simulasi di [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
+Come up with two series resistor circuits and two parallel resistor circuits. Using what you've learned, manually solve for *current* in each circuit (either on pencil+paper or digitally). Show your step-by-step work. Check your work by building a simulation in [CircuitJS](https://www.falstad.com/circuit/circuitjs.html).
 
-Di dalam jurnal prototyping Anda, sertakan sketsa rangkaian (bisa berupa foto smartphone dari kertas+pensil), pengerjaan manual Anda untuk mencari arus $$I$$ (sekali lagi, bisa berupa kertas+pensil), dan tangkapan layar dari rangkaian [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) beserta tautan langsungnya. (Ingat, Anda dapat membuat tautan CircuitJS dengan membuka File -> Export as Link).
+In your prototyping journals, include a sketch of the circuit (can be a smartphone picture of paper+pencil), your manual work to solve for current $$I$$ (again, can be paper+pencil), and a screenshot of the [CircuitJS](https://www.falstad.com/circuit/circuitjs.html) circuit along with a direct link. (Remember, you can create a CircuitJS link by going to File -> Export as Link).
 
-## Sumber Daya
+## Resources
 
 * [Resistors in series and parallel](https://opentextbc.ca/universityphysicsv2openstax/chapter/resistors-in-series-and-parallel/), opentextbc.ca
 * [Series and Parallel Resistors](https://www.khanacademy.org/science/ap-physics-1/ap-circuits-topic/series-circuits-ap/v/ee-series-resistors), Khan Academy
@@ -358,17 +358,17 @@ Di dalam jurnal prototyping Anda, sertakan sketsa rangkaian (bisa berupa foto sm
 
 <!-- TODO: Engineering Mindset has a nice [animation](https://youtu.be/kcL2_D33k3o?t=858) of differences between series and parallel -->
 
-## Pelajaran Selanjutnya
+## Next Lesson
 
-Di [pelajaran berikutnya](resistors.md), kita akan mempelajari lebih lanjut tentang resistor, bagaimana mereka dibuat, cara menggunakannya, bagaimana mereka dikarakterisasi, dan cara menghitung disipasi dayanya.
+In the [next lesson](resistors.md), we will learn more about resistors, how they're made, how to use them, how they're characterized, and how to calculate their power dissipation.
 
 <nav class="lesson-nav" aria-label="Lesson navigation">
   <a href="ohms-law.html" class="nav-prev">
-    <div class="nav-label">&larr; Pelajaran Sebelumnya</div>
-    <div class="nav-title">Hukum Ohm</div>
+    <div class="nav-label">&larr; Previous Lesson</div>
+    <div class="nav-title">Ohm's Law</div>
   </a>
   <a href="resistors.html" class="nav-next">
-    <div class="nav-label">Pelajaran Selanjutnya &rarr;</div>
-    <div class="nav-title">Resistor</div>
+    <div class="nav-label">Next Lesson &rarr;</div>
+    <div class="nav-title">Resistors</div>
   </a>
 </nav>
